@@ -1,7 +1,9 @@
 <template>
-  <header class="h-12 flex flex-row items-center px-2 gap-2">
-    <TheAppIcon class="w-6 h-6"></TheAppIcon>
+  <header class="h-12 p-2 gap-3 flex flex-row items-center">
+    <the-app-icon class="w-6 h-6"></the-app-icon>
     <h1 class="text-xl">Cycle Plan</h1>
+    <app-divider vertical></app-divider>
+    <app-click-to-edit v-model="cycleName" class="text-lg"> </app-click-to-edit>
   </header>
 </template>
 
@@ -9,9 +11,11 @@
 import { useStore } from "../store";
 import { computed, defineComponent } from "vue";
 import TheAppIcon from "../assets/logo.svg?component";
+import AppClickToEdit from "./AppClickToEdit.vue";
+import AppDivider from "./AppDivider.vue";
 
 export default defineComponent({
-  components: { TheAppIcon },
+  components: { AppClickToEdit, AppDivider, TheAppIcon },
   setup() {
     const store = useStore();
 
