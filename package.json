@@ -17,8 +17,8 @@
     "konva": "^8.1.1",
     "register-service-worker": "^1.7.1",
     "splitpanes": "^3.0.6",
-    "vue-konva": "^2.1.7",
     "vue": "^3.0.5",
+    "vue-konva": "^2.1.7",
     "vuex": "^4.0.2"
   },
   "devDependencies": {
@@ -37,12 +37,13 @@
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-vue": "^6.2.2",
     "mocha": "^9.0.3",
-    "prettier": "^2.2.1",
     "postcss": "^8.3.6",
+    "prettier": "^2.2.1",
     "tailwindcss": "^2.2.7",
     "ts-mocha": "^8.0.0",
     "typescript": "~4.1.5",
     "vite": "^2.4.2",
+    "vite-svg-loader": "^2.1.0",
     "vue-tsc": "^0.0.24"
   }
 }
