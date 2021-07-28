@@ -1,6 +1,8 @@
 <template>
-  <div class="flex flex-col">
-    <div class="flex-grow-0"></div>
+  <div class="flex flex-col h-screen">
+    <div class="flex-grow-0">
+      <TheHeaderBar class="shadow-lg"></TheHeaderBar>
+    </div>
     <main class="flex-grow">
       <splitpanes>
         <pane :size="panePos"> </pane>
@@ -15,11 +17,12 @@ import { computed, defineComponent, watchEffect } from "vue";
 import { Splitpanes, Pane } from "splitpanes";
 import "splitpanes/dist/splitpanes.css";
 import { useStore } from "./store";
+import TheHeaderBar from "./components/TheHeaderBar.vue";
 
 export default defineComponent({
   name: "App",
 
-  components: { Pane, Splitpanes },
+  components: { TheHeaderBar, Pane, Splitpanes },
 
   setup() {
     const store = useStore();
