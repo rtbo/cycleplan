@@ -8,7 +8,9 @@
         <pane :size="panePos">
           <the-task-table></the-task-table>
         </pane>
-        <pane :size="100 - panePos"> </pane>
+        <pane :size="100 - panePos">
+          <the-gantt-stage></the-gantt-stage>
+        </pane>
       </splitpanes>
     </main>
   </div>
@@ -19,13 +21,14 @@ import { computed, defineComponent, watchEffect } from "vue";
 import { Splitpanes, Pane } from "splitpanes";
 import "splitpanes/dist/splitpanes.css";
 import { useStore } from "./store";
+import TheGanttStage from "./components/TheGanttStage.vue";
 import TheHeaderBar from "./components/TheHeaderBar.vue";
 import TheTaskTable from "./components/TheTaskTable.vue";
 
 export default defineComponent({
   name: "App",
 
-  components: { Pane, Splitpanes, TheHeaderBar, TheTaskTable },
+  components: { Pane, Splitpanes, TheGanttStage, TheHeaderBar, TheTaskTable },
 
   setup() {
     const store = useStore();

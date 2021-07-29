@@ -2611,17 +2611,17 @@ vue-eslint-parser@^7.0.0:
     lodash "^4.17.21"
     semver "^6.3.0"
 
-vue-konva@^2.1.7:
-  version "2.1.7"
-  resolved "https://registry.yarnpkg.com/vue-konva/-/vue-konva-2.1.7.tgz#1d94471e0b6a3d4139e118a22b4c907f4a091f9c"
-  integrity sha512-uKFp1/tGbt9HAcTXukk/PuPtCMfCSmNyU3Feo3Av4XVfcoBgVQA69+H9r2VQMX+Vwphez1qSfGf7ZNstM3nYRw==
-
 vue-tsc@^0.0.24:
   version "0.0.24"
   resolved "https://registry.yarnpkg.com/vue-tsc/-/vue-tsc-0.0.24.tgz#0cd90db679f53ea1694254b8663fdb3d624a0872"
   integrity sha512-Qx0V7jkWMtvddtaWa1SA8YKkBCRmjq9zZUB2UIMZiso6JSH538oHD2VumSzkoDnAfFbY3t0/j1mB2abpA0bGWA==
   dependencies:
     unzipper "0.10.11"
+
+vue3-konva@^2.1.7:
+  version "2.1.7"
+  resolved "https://registry.yarnpkg.com/vue3-konva/-/vue3-konva-2.1.7.tgz#d6fa1357eaf22e89487049709ebf7128ea7643a6"
+  integrity sha512-3HMDdE6w9cDj5VSXJ9hFwTJ/S/iCzOIWcsi/QvWWxeIrLF6y3AafBtFw1beX8BrKYzmi88kT6j5Am6CNmP/ffw==
 
 vue@^2.0.0:
   version "2.6.14"
