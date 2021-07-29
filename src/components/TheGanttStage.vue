@@ -1,26 +1,24 @@
 <template>
   <div id="gantt-wrapper" ref="wrapperEl">
     <kv-stage :config="config">
-      <kv-layer>
-        <TheGanttTimeScale></TheGanttTimeScale>
-        <TheGanttTaskGroup></TheGanttTaskGroup>
-        <TheGanttCycleTimeGroup></TheGanttCycleTimeGroup>
-      </kv-layer>
+      <kv-layer></kv-layer>
     </kv-stage>
-    <slot></slot>
   </div>
 </template>
 
 <script lang="ts">
 import { computed, defineComponent, onMounted, provide, Ref, ref } from "vue";
+import KvStage from "../konva/KvStage";
+import KvLayer from "../konva/KvLayer";
 import { useStore } from "../store";
-import TheGanttTimeScale from "./TheGanttTimeScale.vue";
-import TheGanttTaskGroup from "./TheGanttTaskGroup.vue";
-import TheGanttCycleTimeGroup from "./TheGanttCycleTimeGroup.vue";
+// import TheGanttTimeScale from "./TheGanttTimeScale.vue";
+// import TheGanttTaskGroup from "./TheGanttTaskGroup.vue";
+// import TheGanttCycleTimeGroup from "./TheGanttCycleTimeGroup.vue";
 import { stageHeightKey, stageWidthKey } from "./gantt";
 
 export default defineComponent({
-  components: { TheGanttCycleTimeGroup, TheGanttTaskGroup, TheGanttTimeScale },
+  // components: { TheGanttCycleTimeGroup, TheGanttTaskGroup, TheGanttTimeScale },
+  components: { KvStage, KvLayer },
   setup() {
     const store = useStore();
 
