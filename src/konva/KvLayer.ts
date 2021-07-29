@@ -1,19 +1,18 @@
 import { defineComponent, h, inject, provide, watch } from "vue";
 import Kv from "konva";
-import { kvContainerKey, kvStageKey, makeUndefinedDefault, optionalProp } from ".";
+import { kvContainerKey, kvStageKey, optionalProp } from ".";
 import { KvContainerProps } from "./KvContainer";
 
 export const KvLayerProps = {
   ...KvContainerProps,
 
-    clearBeforeDraw: optionalProp(Boolean),
-    imageSmoothingEnabled: Boolean,
+  clearBeforeDraw: optionalProp(Boolean),
+  imageSmoothingEnabled: Boolean,
 };
-
 
 export default defineComponent({
   props: KvLayerProps,
-  setup(props, {slots}) {
+  setup(props, { slots }) {
     const stage = inject(kvStageKey);
 
     const layer = new Kv.Layer(props as Kv.LayerConfig);
@@ -27,13 +26,16 @@ export default defineComponent({
 
     let key: keyof typeof props;
     for (key in props) {
-      watch(() => props[key], (newVal, oldVal) => {
-        layer.attrs({
-          key: newVal,
-        });
-      });
+      watch(
+        () => props[key],
+        (newVal) => {
+          layer.attrs({
+            key: newVal,
+          });
+        }
+      );
     }
 
     return () => h("template", slots.default?.());
-  }
-})
+  },
+});

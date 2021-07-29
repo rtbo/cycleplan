@@ -23,7 +23,9 @@ export const KvShapeProps = {
   fillLinearGradientEndPoint: optionalProp(Object as PropType<Kv.Vector2d>),
   fillLinearGradientEndPointX: optionalProp(Number),
   fillLinearGradientEndPointY: optionalProp(Number),
-  fillLinearGradientColorStops: optionalProp(Array as PropType<Array<number | string>>),
+  fillLinearGradientColorStops: optionalProp(
+    Array as PropType<Array<number | string>>
+  ),
   fillRadialGradientStartPoint: optionalProp(Object as PropType<Kv.Vector2d>),
   fillRadialGradientStartPointX: optionalProp(Number),
   fillRadialGradientStartPointY: optionalProp(Number),
@@ -32,7 +34,9 @@ export const KvShapeProps = {
   fillRadialGradientEndPointY: optionalProp(Number),
   fillRadialGradientStartRadius: optionalProp(Number),
   fillRadialGradientEndRadius: optionalProp(Number),
-  fillRadialGradientColorStops: optionalProp(Array as PropType<Array<number | string>>),
+  fillRadialGradientColorStops: optionalProp(
+    Array as PropType<Array<number | string>>
+  ),
   fillEnabled: optionalProp(Boolean),
   fillPriority: optionalProp(String),
   stroke: optionalProp([String, Object as PropType<CanvasGradient>]),
@@ -44,8 +48,12 @@ export const KvShapeProps = {
   strokeEnabled: optionalProp(Boolean),
   lineJoin: optionalProp(String as PropType<"round" | "bevel" | "miter">),
   lineCap: optionalProp(String as PropType<"butt" | "round" | "square">),
-  sceneFunc: optionalProp(Function as PropType<(con: Kv.Context, shape: Kv.Shape) => void>),
-  hitFunc: optionalProp(Function as PropType<(con: Kv.Context, shape: Kv.Shape) => void>),
+  sceneFunc: optionalProp(
+    Function as PropType<(con: Kv.Context, shape: Kv.Shape) => void>
+  ),
+  hitFunc: optionalProp(
+    Function as PropType<(con: Kv.Context, shape: Kv.Shape) => void>
+  ),
   shadowColor: optionalProp(String),
   shadowBlur: optionalProp(Number),
   shadowOffset: optionalProp(Object as PropType<Kv.Vector2d>),

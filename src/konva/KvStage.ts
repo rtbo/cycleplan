@@ -1,6 +1,15 @@
-import { defineComponent, h, onMounted, PropType, provide, Ref, ref, watch } from "vue";
+import {
+  defineComponent,
+  h,
+  onMounted,
+  PropType,
+  provide,
+  Ref,
+  ref,
+  watch,
+} from "vue";
 import Kv from "konva";
-import { kvContainerKey, kvStageKey } from ".";
+import { kvStageKey } from ".";
 
 type StageConfig = ConstructorParameters<typeof Kv.Stage>[0];
 
@@ -24,9 +33,12 @@ export default defineComponent({
       stage.container(div.value as HTMLDivElement);
     });
 
-    watch(() => props.config, (newVal) => {
-      stage.setAttrs(newVal);
-    });
+    watch(
+      () => props.config,
+      (newVal) => {
+        stage.setAttrs(newVal);
+      }
+    );
 
     provide(kvStageKey, stage);
 
