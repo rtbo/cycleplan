@@ -5,7 +5,9 @@
     </div>
     <main class="flex-grow">
       <splitpanes>
-        <pane :size="panePos"> </pane>
+        <pane :size="panePos">
+          <the-task-table></the-task-table>
+        </pane>
         <pane :size="100 - panePos"> </pane>
       </splitpanes>
     </main>
@@ -18,11 +20,12 @@ import { Splitpanes, Pane } from "splitpanes";
 import "splitpanes/dist/splitpanes.css";
 import { useStore } from "./store";
 import TheHeaderBar from "./components/TheHeaderBar.vue";
+import TheTaskTable from "./components/TheTaskTable.vue";
 
 export default defineComponent({
   name: "App",
 
-  components: { TheHeaderBar, Pane, Splitpanes },
+  components: { Pane, Splitpanes, TheHeaderBar, TheTaskTable },
 
   setup() {
     const store = useStore();
