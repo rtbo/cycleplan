@@ -47,8 +47,8 @@ function appStyleRef(): ComputedRef<AppStyle> {
 
     return {
       darkMode: dm,
-      taskBar: style.getPropertyValue("--task-bar"),
-      cycleLine: style.getPropertyValue("--cycle-line"),
+      taskBar: style.getPropertyValue("--color-task-bar"),
+      cycleLine: style.getPropertyValue("--color-cycle-line"),
       textColor: style.getPropertyValue("color"),
     };
   });
