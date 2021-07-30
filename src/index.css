@@ -3,7 +3,20 @@
 @tailwind utilities;
 
 @layer base {
-  html {
-    @apply bg-white text-black text-opacity-80 dark:bg-gray-800 dark:text-white;
+  @media (prefers-color-scheme: light) {
+    :root {
+    }
   }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+    }
+  }
+
+  :root {
+    @apply text-opacity-80;
+    @apply bg-white text-black;
+    @apply dark:bg-gray-800 dark:text-white;
+  }
+
 }
