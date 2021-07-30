@@ -34,7 +34,7 @@ type ContainerCtor = new (
 type NodeCtor = new (config: Kv.NodeConfig | undefined) => Kv.Node;
 
 const konvaPlugin: Plugin = {
-  install(app, options) {
+  install(app) {
     app.component("KvStage", KvStage);
     app.component("KvLayer", KvLayer);
 
@@ -42,14 +42,14 @@ const konvaPlugin: Plugin = {
       const Class: ContainerCtor = (
         Kv as unknown as { [index: string]: ContainerCtor }
       )[name];
-      app.component("Kv"+name, KvContainer(Class));
+      app.component("Kv" + name, KvContainer(Class));
     });
 
     KONVA_NODES.forEach((name) => {
-      const Class: NodeCtor = (
-        Kv as unknown as { [index: string]: NodeCtor }
-      )[name];
-      app.component("Kv"+name, KvNode(Class));
+      const Class: NodeCtor = (Kv as unknown as { [index: string]: NodeCtor })[
+        name
+      ];
+      app.component("Kv" + name, KvNode(Class));
     });
   },
 };

@@ -1,4 +1,3 @@
-
 export function isPositiveInt(val: string): boolean {
   return /^\d+$/.test(val);
 }

@@ -9,6 +9,7 @@ import {
 import Kv from "konva";
 import { kvContainerKey } from "./keys";
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export default (
   Class: new (config: Kv.ContainerConfig | undefined) => Kv.Container
 ) =>

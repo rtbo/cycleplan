@@ -1,4 +1,11 @@
-import { defineComponent, h, inject, onUnmounted, PropType, provide, watch } from "vue";
+import {
+  defineComponent,
+  inject,
+  onUnmounted,
+  PropType,
+  provide,
+  watch,
+} from "vue";
 import Kv from "konva";
 import { kvContainerKey, kvLayerKey, kvStageKey } from "./keys";
 

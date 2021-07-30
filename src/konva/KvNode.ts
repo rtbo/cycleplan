@@ -1,10 +1,9 @@
-import { defineComponent, inject, onUnmounted, PropType, provide, watch } from "vue";
+import { defineComponent, inject, onUnmounted, PropType, watch } from "vue";
 import Kv from "konva";
 import { kvContainerKey } from "./keys";
 
-export default (
-  Class: new (config: Kv.NodeConfig | undefined) => Kv.Node
-) =>
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+export default (Class: new (config: Kv.NodeConfig | undefined) => Kv.Node) =>
   defineComponent({
     props: {
       config: {
@@ -12,7 +11,7 @@ export default (
       },
     },
 
-    setup(props, { slots }) {
+    setup(props) {
       const parent = inject(kvContainerKey);
 
       const node = new Class(props.config);

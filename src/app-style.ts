@@ -54,7 +54,6 @@ function appStyleRef(): ComputedRef<AppStyle> {
   });
 }
 
-
 export function provideAppStyle(): void {
   provide(appStyleKey, appStyleRef());
 }
