@@ -7,13 +7,14 @@
 <script lang="ts">
 import { computed, defineComponent } from "vue";
 import { useStore } from "../store";
+import { useAppStyle } from "../app-style";
 
 const HEIGHT = 20;
 
 export default defineComponent({
   setup() {
     const store = useStore();
-    const defaultColor = computed(() => "#2222bb");
+    const appStyle = useAppStyle();
     const tasksCfg = computed(() =>
       store.state.tasks.map((task) => {
         const bounds = task.vbounds;
@@ -24,7 +25,7 @@ export default defineComponent({
           y: middle - HEIGHT / 2,
           width: store.state.timeScale * task.duration,
           height: HEIGHT,
-          fill: task.color ?? defaultColor.value,
+          fill: task.color ?? `rgb(${appStyle.value.taskBar})`,
         };
       })
     );

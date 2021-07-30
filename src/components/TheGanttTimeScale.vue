@@ -9,6 +9,7 @@
 <script lang="ts">
 import { computed, ComputedRef, defineComponent, inject } from "vue";
 import { useStore } from "../store";
+import { useAppStyle } from "../app-style";
 import { stageHeightKey, stageWidthKey, useHeaderTheme } from "./gantt";
 
 const MIN_PX = 50;
@@ -17,6 +18,7 @@ const GRAD_FACTORS = [2, 2.5, 2];
 export default defineComponent({
   setup() {
     const store = useStore();
+    const appStyle = useAppStyle();
     const stageWidth = inject(stageWidthKey);
     const stageHeight = inject(stageHeightKey);
 
@@ -73,7 +75,7 @@ export default defineComponent({
         fontSize: 10,
         align: "left",
         verticalAlign: "middle",
-        fill: headerTheme.value.txtCol,
+        fill: appStyle.value.textColor,
       }))
     );
 

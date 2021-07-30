@@ -5,11 +5,15 @@
 @layer base {
   @media (prefers-color-scheme: light) {
     :root {
+      --task-bar: 35,35,130;
+      --cycle-line: 130,35,35;
     }
   }
 
   @media (prefers-color-scheme: dark) {
     :root {
+      --task-bar: 40,40,200;
+      --cycle-line: 200,40,40;
     }
   }
 
