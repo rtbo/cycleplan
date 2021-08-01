@@ -1,63 +1,37 @@
-import {
-  computed,
-  ComputedRef,
-  inject,
-  InjectionKey,
-  provide,
-  Ref,
-  ref,
-} from "vue";
+import { computed, ComputedRef, inject, InjectionKey, provide } from "vue";
 
 export interface AppStyle {
-  darkMode: boolean;
+  dark: boolean;
   taskBar: string;
   cycleLine: string;
   textColor: string;
 }
 
-const darkModeKey: InjectionKey<ComputedRef<boolean>> = Symbol();
+const darkKey: InjectionKey<ComputedRef<boolean>> = Symbol();
 const appStyleKey: InjectionKey<ComputedRef<AppStyle>> = Symbol();
 
-function darkModeRef(): Ref<boolean> {
-  const mq = window.matchMedia("(prefers-color-scheme: dark)");
-  const darkMode = ref(mq.matches);
-
-  mq.addEventListener("change", () => {
-    darkMode.value = mq.matches;
-  });
-
-  return darkMode;
+export function provideDark(dark: ComputedRef<boolean>): void {
+  provide(darkKey, dark);
 }
 
-export function provideDarkMode(): void {
-  provide(darkModeKey, darkModeRef());
+export function useDark(): ComputedRef<boolean> | undefined {
+  return inject(darkKey);
 }
 
-export function injectDarkMode(): ComputedRef<boolean> {
-  const dm = inject(darkModeKey) || darkModeRef();
-  return computed(() => dm.value);
-}
-
-function appStyleRef(): ComputedRef<AppStyle> {
-  const darkMode = injectDarkMode();
-
-  return computed(() => {
-    const dm = darkMode.value;
+export function provideAppStyle(dark: ComputedRef<boolean>): void {
+  const appStyle = computed(() => {
     const style = getComputedStyle(document.documentElement);
 
     return {
-      darkMode: dm,
+      dark: dark.value,
       taskBar: style.getPropertyValue("--color-task-bar"),
       cycleLine: style.getPropertyValue("--color-cycle-line"),
       textColor: style.getPropertyValue("color"),
     };
   });
+  provide(appStyleKey, appStyle);
 }
 
-export function provideAppStyle(): void {
-  provide(appStyleKey, appStyleRef());
-}
-
-export function useAppStyle(): ComputedRef<AppStyle> {
-  return inject(appStyleKey) || appStyleRef();
+export function useAppStyle(): ComputedRef<AppStyle> | undefined {
+  return inject(appStyleKey);
 }

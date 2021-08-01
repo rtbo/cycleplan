@@ -36,6 +36,8 @@ export interface LinkState {
 
 export type EditMode = undefined | "task-insert";
 
+export type DarkMode = "media" | "light" | "dark";
+
 /**
  * Separate interface for the cycle time input
  *
@@ -56,7 +58,7 @@ export interface State {
   cycleTimeInput: CycleTimeInput;
   cycleTime: number;
 
-  darkMode: boolean;
+  darkMode: DarkMode;
   headerVBounds: VerticalBounds;
   panePos: number;
   editMode: EditMode;
@@ -118,7 +120,7 @@ export function createState(): State {
     },
     cycleTime: 13,
 
-    darkMode: localStorage.getItem("dark-mode") === "true",
+    darkMode: (localStorage.getItem("dark-mode") as DarkMode) || "media",
     panePos: 33,
     editMode: undefined,
     headerVBounds: {

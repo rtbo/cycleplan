@@ -17,14 +17,23 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, watchEffect } from "vue";
+import { computed, defineComponent, readonly, ref, watchEffect } from "vue";
 import { Splitpanes, Pane } from "splitpanes";
 import "splitpanes/dist/splitpanes.css";
 import { useStore } from "./store";
-import { provideAppStyle, provideDarkMode } from "./app-style";
+import { provideAppStyle, provideDark } from "./app-style";
 import TheGanttStage from "./components/TheGanttStage.vue";
 import TheHeaderBar from "./components/TheHeaderBar.vue";
 import TheTaskTable from "./components/TheTaskTable.vue";
+
+function prefersDarkColorScheme() {
+  const mq = window.matchMedia("(prefers-color-scheme: dark)");
+  const prefers = ref(mq.matches);
+  mq.addEventListener("change", () => {
+    prefers.value = mq.matches;
+  });
+  return readonly(prefers);
+}
 
 export default defineComponent({
   name: "App",
@@ -32,11 +41,7 @@ export default defineComponent({
   components: { Pane, Splitpanes, TheGanttStage, TheHeaderBar, TheTaskTable },
 
   setup() {
-    provideDarkMode();
-    provideAppStyle();
-
     const store = useStore();
-    const panePos = computed(() => store.state.panePos);
 
     const pageTitle = computed(() => {
       if (store.state.name) {
@@ -45,10 +50,29 @@ export default defineComponent({
         return "Cycle Plan";
       }
     });
-
     watchEffect(() => {
       document.title = pageTitle.value;
     });
+
+    const prefersDark = prefersDarkColorScheme();
+    const darkMode = computed(() => store.state.darkMode);
+    const dark = computed(
+      () =>
+        (darkMode.value === "media" && prefersDark.value) ||
+        darkMode.value === "dark"
+    );
+    watchEffect(() => {
+      if (dark.value) {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
+    });
+
+    provideDark(dark);
+    provideAppStyle(dark);
+
+    const panePos = computed(() => store.state.panePos);
 
     return {
       panePos,

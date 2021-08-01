@@ -13,7 +13,7 @@ function colorVarRGB(colorVariable) {
 
 module.exports = {
   purge: ["./index.html", "./src/**/*.{vue,ts}"],
-  darkMode: "media",
+  darkMode: "class",
   theme: {
     extend: {
       colors: {

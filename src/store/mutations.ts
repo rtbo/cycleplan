@@ -5,6 +5,7 @@ import {
   VerticalBounds,
   newId,
   CycleTimeInput,
+  DarkMode,
 } from "./state";
 import { planStateCycle } from "./algo";
 
@@ -46,9 +47,9 @@ export const mutations = {
     state.editMode = value;
   },
 
-  "dark-mode": (state: State, value: boolean): void => {
+  "dark-mode": (state: State, value: DarkMode): void => {
     state.darkMode = value;
-    localStorage.setItem("dark-mode", value ? "true" : "false");
+    localStorage.setItem("dark-mode", value);
   },
 
   "vertical-bounds": (
