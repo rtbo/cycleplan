@@ -5,8 +5,10 @@
     <app-divider vertical></app-divider>
     <app-click-to-edit v-model="cycleName" class="text-lg"> </app-click-to-edit>
     <app-divider vertical></app-divider>
-    <span>Cycle Time:</span>
-    <the-cycle-time-group></the-cycle-time-group>
+    <div class="flex items-center">
+      <span>Cycle Time:&nbsp;</span>
+      <the-cycle-time-group></the-cycle-time-group>
+    </div>
   </header>
 </template>
 
@@ -14,7 +16,7 @@
 import { useStore } from "../store";
 import { computed, defineComponent } from "vue";
 import TheAppIcon from "../assets/logo.svg?component";
-import TheCycleTimeGroup from "./TheCycleTimeGroup.vue"
+import TheCycleTimeGroup from "./TheCycleTimeGroup.vue";
 import AppClickToEdit from "./AppClickToEdit.vue";
 import AppDivider from "./AppDivider.vue";
 
