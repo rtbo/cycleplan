@@ -7,7 +7,7 @@
   >
     {{ modelValue }}
     <button style="cursor: pointer" v-show="keepPencilSpace || showPencil">
-      <span v-show="showPencil" class="mdi mdi-pencil"></span>
+      <span v-show="showPencil" class="mdi mdi-pencil text-on-surface"></span>
     </button>
   </span>
   <span v-else @mouseover="showPencil = true" @mouseleave="showPencil = false">
@@ -21,10 +21,10 @@
       :style="inputStyle"
     />
     <button @click="applyEdit" :disabled="!valid">
-      <span class="mdi mdi-keyboard-return"></span>
+      <span class="mdi mdi-keyboard-return text-on-surface"></span>
     </button>
     <button @click="cancelEdit">
-      <span class="mdi mdi-keyboard-esc"></span>
+      <span class="mdi mdi-keyboard-esc text-on-surface"></span>
     </button>
   </span>
 </template>
