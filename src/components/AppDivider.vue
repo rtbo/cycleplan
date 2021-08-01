@@ -1,5 +1,9 @@
 <template>
-  <hr :class="classes" class="border-opacity-25" role="separator" />
+  <hr
+    :class="classes"
+    class="light:border-opacity-25 dark:border-opacity-25"
+    role="separator"
+  />
 </template>
 
 <script lang="ts">

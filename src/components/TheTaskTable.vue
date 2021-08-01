@@ -1,7 +1,7 @@
 <template>
-  <table id="task-table" class="table-auto">
+  <table id="task-table" class="mx-1 table-auto w-full">
     <thead>
-      <tr class="border-b border-opacity-50 h-12">
+      <tr class="border-b border-opacity-75 dark:border-opacity-50 h-12">
         <th scope="col" class="text-left">Name</th>
         <th
           v-for="header in headers"
@@ -18,7 +18,7 @@
         v-for="row in rows"
         :key="row.id"
         :class="row.insert ? 'insert-row' : 'task-row'"
-        class="border-b border-opacity-50 h-10"
+        class="border-b border-opacity-75 dark:border-opacity-50 h-10"
         @mouseover="updateInsertSlot(row.id)"
       >
         <th scope="row" v-if="!row.insert" class="text-left">
