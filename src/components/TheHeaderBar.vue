@@ -10,10 +10,11 @@
       <the-cycle-time-group></the-cycle-time-group>
     </div>
     <div class="flex-grow"></div>
-    <button @click="setDarkMode(dark ? 'light' : 'dark')">
-      <span class="mdi" :class="dark ? 'mdi-brightness-5' : 'mdi-brightness-4'">
-      </span>
-    </button>
+    <app-icon-button
+      @click="setDarkMode(dark ? 'light' : 'dark')"
+      :icon="dark ? 'mdi-brightness-5' : 'mdi-brightness-4'"
+      class="text-lg"
+    />
   </header>
 </template>
 

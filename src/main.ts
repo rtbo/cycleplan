@@ -6,6 +6,7 @@ import { key, store } from "./store";
 import "./index.css";
 import AppClickToEdit from "./components/AppClickToEdit.vue";
 import AppDivider from "./components/AppDivider.vue";
+import AppIconButton from "./components/AppIconButton.vue";
 
 const app = createApp(App);
 app.use(konvaPlugin);
@@ -19,6 +20,7 @@ app.directive("focus", {
 const appComps = {
   AppClickToEdit,
   AppDivider,
+  AppIconButton,
 };
 Object.entries(appComps).forEach(([name, comp]) => {
   app.component(name, comp);
