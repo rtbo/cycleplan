@@ -4,6 +4,9 @@
     <h1 class="text-xl">Cycle Plan</h1>
     <app-divider vertical></app-divider>
     <app-click-to-edit v-model="cycleName" class="text-lg"> </app-click-to-edit>
+    <app-divider vertical></app-divider>
+    <span>Cycle Time:</span>
+    <the-cycle-time-group></the-cycle-time-group>
   </header>
 </template>
 
@@ -11,11 +14,12 @@
 import { useStore } from "../store";
 import { computed, defineComponent } from "vue";
 import TheAppIcon from "../assets/logo.svg?component";
+import TheCycleTimeGroup from "./TheCycleTimeGroup.vue"
 import AppClickToEdit from "./AppClickToEdit.vue";
 import AppDivider from "./AppDivider.vue";
 
 export default defineComponent({
-  components: { AppClickToEdit, AppDivider, TheAppIcon },
+  components: { AppClickToEdit, AppDivider, TheAppIcon, TheCycleTimeGroup },
   setup() {
     const store = useStore();
 
