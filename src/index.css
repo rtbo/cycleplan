@@ -14,8 +14,8 @@
 
   @media (prefers-color-scheme: dark) {
     :root {
-      --color-task-bar: 40,40,200;
-      --color-cycle-line: 200,40,40;
+      --color-task-bar: 80,80,200;
+      --color-cycle-line: 200,80,80;
       --color-on-surface: 255,255,255;
       --color-accent: 150,150,245;
     }

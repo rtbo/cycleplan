@@ -137,9 +137,9 @@ export class AtomTask extends Task {
 }
 
 export enum CycleTimeMode {
-  Auto,
-  Loop,
-  Value,
+  Auto = "auto",
+  Fixed = "fixed",
+  Loop = "loop",
 }
 
 /**
@@ -161,9 +161,9 @@ export interface LoopCycleTime<T> {
 /**
  * Cycle time can be set to a fixed value through this interface
  */
-export interface ValueCycleTime<T> {
+export interface FixedCycleTime<T> {
   /** mode is set to value */
-  mode: CycleTimeMode.Value;
+  mode: CycleTimeMode.Fixed;
   /** Optionally, the cycle time starts by a task */
   loopIn?: T;
   /** The value of the cycle time */
@@ -179,14 +179,14 @@ export interface AutoCycleTime {
   mode: CycleTimeMode.Auto;
 }
 
-export type CycleTime<T> = LoopCycleTime<T> | ValueCycleTime<T> | AutoCycleTime;
+export type CycleTime<T> = LoopCycleTime<T> | FixedCycleTime<T> | AutoCycleTime;
 
 export function isAutoCycleTime<T>(ct: CycleTime<T>): ct is AutoCycleTime {
   return ct.mode === CycleTimeMode.Auto;
 }
 
-export function isValueCycleTime<T>(ct: CycleTime<T>): ct is ValueCycleTime<T> {
-  return ct.mode === CycleTimeMode.Value;
+export function isFixedCycleTime<T>(ct: CycleTime<T>): ct is FixedCycleTime<T> {
+  return ct.mode === CycleTimeMode.Fixed;
 }
 
 export function isLoopCycleTime<T>(ct: CycleTime<T>): ct is LoopCycleTime<T> {
@@ -203,7 +203,7 @@ export function mapCycleTime<F, T>(
       loopIn: ct.loopIn !== undefined ? fn(ct.loopIn) : undefined,
       loopOut: ct.loopOut !== undefined ? fn(ct.loopOut) : undefined,
     };
-  } else if (isValueCycleTime(ct)) {
+  } else if (isFixedCycleTime(ct)) {
     return {
       mode: ct.mode,
       loopIn: ct.loopIn != undefined ? fn(ct.loopIn) : undefined,
@@ -300,7 +300,7 @@ export function planCycle(cycle: Cycle): CyclePlan {
   }
 
   let finish: number;
-  if (isValueCycleTime(cycle.cycleTime)) {
+  if (isFixedCycleTime(cycle.cycleTime)) {
     finish = cycle.cycleTime.value;
   } else if (isLoopCycleTime(cycle.cycleTime) && cycle.cycleTime.loopOut) {
     finish = plan.lookUp(cycle.cycleTime.loopOut).earlyFinish;
@@ -322,7 +322,7 @@ export function planCycle(cycle: Cycle): CyclePlan {
       throw new Error("Cycle can't loop out before it loops in");
     }
     plan.cycleTime = loopOut - loopIn;
-  } else if (isValueCycleTime(ct)) {
+  } else if (isFixedCycleTime(ct)) {
     plan.cycleTime = ct.value;
   } else {
     plan.cycleTime = finish;

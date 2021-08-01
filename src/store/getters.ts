@@ -11,10 +11,10 @@ export function cycleTimeDef(state: State): CycleTime<number> {
         loopIn: state.cycleTimeInput.loopIn,
         loopOut: state.cycleTimeInput.loopOut,
       };
-    case CycleTimeMode.Value:
+    case CycleTimeMode.Fixed:
       return {
-        mode: CycleTimeMode.Value,
-        value: state.cycleTimeInput.value,
+        mode: CycleTimeMode.Fixed,
+        value: state.cycleTimeInput.fixedValue,
       };
   }
 }

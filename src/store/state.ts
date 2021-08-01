@@ -44,7 +44,7 @@ export type EditMode = undefined | "task-insert";
  */
 export interface CycleTimeInput {
   mode: CycleTimeMode;
-  value: number;
+  fixedValue: number;
   loopIn?: number;
   loopOut?: number;
 }
@@ -111,8 +111,8 @@ export function createState(): State {
     tasks,
     links,
     cycleTimeInput: {
-      mode: CycleTimeMode.Value,
-      value: 13,
+      mode: CycleTimeMode.Fixed,
+      fixedValue: 13,
       loopIn: tasks[0].id,
       loopOut: tasks[2].id,
     },
