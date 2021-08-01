@@ -3,7 +3,7 @@
     <div class="pl-3 pr-2 py-1 rounded-tl-md" :class="autoClasses">
       <span @click="activeMode = 'auto'">
         Auto
-        <span v-if="autoActive" class="text-accent ml-1 font-bold">
+        <span v-if="autoActive" class="text-primary ml-1 font-bold">
           {{ cycleTimeValue }}
         </span>
       </span>
@@ -15,7 +15,7 @@
           v-if="fixedActive"
           v-model="fixedValue"
           :max-input-width="50"
-          class="text-accent ml-1 font-bold"
+          class="text-primary ml-1 font-bold"
           :validate="isPositiveNumber"
         ></app-click-to-edit>
       </span>
@@ -23,7 +23,7 @@
     <div class="pl-2 pr-3 py-1 rounded-br-md" :class="loopClasses">
       <span @click="activeMode = 'loop'">
         Loop
-        <span v-if="loopActive" class="text-accent ml-1 font-bold">
+        <span v-if="loopActive" class="text-primary ml-1 font-bold">
           {{ cycleTimeValue }}
         </span>
       </span>
