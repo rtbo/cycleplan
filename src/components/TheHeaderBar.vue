@@ -1,5 +1,5 @@
 <template>
-  <header class="h-12 p-2 gap-3 flex flex-row items-center">
+  <header class="h-14 p-2 gap-3 flex flex-row items-center">
     <the-app-icon class="w-6 h-6"></the-app-icon>
     <h1 class="text-xl">Cycle Plan</h1>
     <app-divider vertical></app-divider>
