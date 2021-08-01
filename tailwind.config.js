@@ -18,6 +18,7 @@ module.exports = {
     extend: {
       colors: {
         "on-surface": opacityHandler("--color-on-surface"),
+        "accent": opacityHandler("--color-accent"),
       }
     },
   },

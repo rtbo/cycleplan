@@ -8,6 +8,7 @@
       --color-task-bar: 35,35,130;
       --color-cycle-line: 130,35,35;
       --color-on-surface: 0,0,0;
+      --color-accent: 35,35,130;
     }
   }
 
@@ -16,6 +17,7 @@
       --color-task-bar: 40,40,200;
       --color-cycle-line: 200,40,40;
       --color-on-surface: 255,255,255;
+      --color-accent: 150,150,245;
     }
   }
 
