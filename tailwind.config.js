@@ -1,5 +1,5 @@
 
-function opacityHandler(colorVariable) {
+function colorVarRGB(colorVariable) {
   return ({opacityVariable, opacityValue}) => {
     if (opacityValue !== undefined) {
       return `rgba(var(${colorVariable}), ${opacityValue})`;
@@ -17,8 +17,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        "on-surface": opacityHandler("--color-on-surface"),
-        "accent": opacityHandler("--color-accent"),
+        "on-surface": colorVarRGB("--color-on-surface"),
+        "accent": colorVarRGB("--color-accent"),
       }
     },
   },
