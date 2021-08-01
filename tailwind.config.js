@@ -12,6 +12,7 @@ function colorVarRGB(colorVariable) {
 }
 
 module.exports = {
+  mode: "jit",
   purge: ["./index.html", "./src/**/*.{vue,ts}"],
   darkMode: "class",
   theme: {
