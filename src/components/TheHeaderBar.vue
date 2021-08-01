@@ -23,12 +23,10 @@ import { DarkMode } from "../store/state";
 import { computed, defineComponent } from "vue";
 import TheAppIcon from "../assets/logo.svg?component";
 import TheCycleTimeGroup from "./TheCycleTimeGroup.vue";
-import AppClickToEdit from "./AppClickToEdit.vue";
-import AppDivider from "./AppDivider.vue";
 import { useDark } from "../app-style";
 
 export default defineComponent({
-  components: { AppClickToEdit, AppDivider, TheAppIcon, TheCycleTimeGroup },
+  components: { TheAppIcon, TheCycleTimeGroup },
   setup() {
     const store = useStore();
 

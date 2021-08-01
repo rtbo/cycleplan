@@ -104,7 +104,6 @@ import {
   Ref,
   watch,
 } from "vue";
-import AppClickToEdit from "./AppClickToEdit.vue";
 import { isPositiveInt } from "./util";
 import { useStore } from "../store";
 import { TaskState, VerticalBounds } from "../store/state";
@@ -121,7 +120,6 @@ type InsertRow = { id: -1; insert: true };
 type Row = InsertRow | TaskState;
 
 export default defineComponent({
-  components: { AppClickToEdit },
   setup() {
     const store = useStore();
 

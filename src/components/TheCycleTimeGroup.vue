@@ -36,10 +36,8 @@ import { computed, defineComponent } from "vue";
 import { CycleTimeMode } from "../model/cycle";
 import { useStore } from "../store";
 import { isPositiveNumber } from "./util";
-import AppClickToEdit from "./AppClickToEdit.vue";
 
 export default defineComponent({
-  components: { AppClickToEdit },
   setup() {
     const store = useStore();
 
