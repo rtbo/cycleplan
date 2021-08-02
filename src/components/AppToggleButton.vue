@@ -2,6 +2,7 @@
   <button
     class="
       bg-on-background
+      border border-on-background
       hover:bg-opacity-25
       hover:border
       hover:border-on-background
@@ -27,13 +28,8 @@ export default defineComponent({
   setup(props, { emit }) {
     const opacityClass = computed(() =>
       props.modelValue
-        ? [
-            "bg-opacity-10",
-            "border",
-            "border-on-background",
-            "border-opacity-10",
-          ]
-        : ["bg-opacity-5", "filter", "contrast-25"]
+        ? ["bg-opacity-10", "border-opacity-10"]
+        : ["bg-opacity-5", "border-opacity-0", "filter", "contrast-25"]
     );
     const toggle = () => {
       emit("update:modelValue", !props.modelValue);
