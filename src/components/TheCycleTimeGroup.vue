@@ -1,15 +1,19 @@
 <template>
   <div class="flex flex-row cursor-pointer">
-    <div class="pl-3 pr-2 py-1 rounded-tl-md" :class="autoClasses">
-      <span @click="activeMode = 'auto'">
+    <div
+      class="pl-3 pr-2 py-1 rounded-tl-md"
+      :class="autoClasses"
+      @click="activeMode = 'auto'"
+    >
+      <span>
         Auto
         <span v-if="autoActive" class="text-primary ml-1 font-bold">
           {{ cycleTimeValue }}
         </span>
       </span>
     </div>
-    <div class="px-2 py-1" :class="fixedClasses">
-      <span @click="activeMode = 'fixed'">
+    <div class="px-2 py-1" :class="fixedClasses" @click="activeMode = 'fixed'">
+      <span>
         Fixed
         <app-click-to-edit
           v-if="fixedActive"
@@ -20,8 +24,12 @@
         ></app-click-to-edit>
       </span>
     </div>
-    <div class="pl-2 pr-3 py-1 rounded-br-md" :class="loopClasses">
-      <span @click="activeMode = 'loop'">
+    <div
+      class="pl-2 pr-3 py-1 rounded-br-md"
+      :class="loopClasses"
+      @click="activeMode = 'loop'"
+    >
+      <span>
         Loop
         <span v-if="loopActive" class="text-primary ml-1 font-bold">
           {{ cycleTimeValue }}
