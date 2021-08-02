@@ -6,6 +6,8 @@
       hover:border
       hover:border-on-background
       hover:border-opacity-20
+      transition
+      duration-200
     "
     :class="opacityClass"
     @click="toggle"
