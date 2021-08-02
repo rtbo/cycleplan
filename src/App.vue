@@ -1,7 +1,13 @@
 <template>
   <div class="flex flex-col h-screen">
     <div class="flex-grow-0">
-      <TheHeaderBar class="shadow-lg"></TheHeaderBar>
+      <TheHeaderBar
+        class="
+          shadow-lg
+          border-b border-on-background border-opacity-25
+          dark:border-opacity-10
+        "
+      ></TheHeaderBar>
     </div>
     <main class="flex-grow">
       <splitpanes>
