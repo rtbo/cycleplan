@@ -14,7 +14,7 @@
         <app-click-to-edit
           v-if="fixedActive"
           v-model="fixedValue"
-          :max-input-width="50"
+          input-class="w-16"
           class="text-primary ml-1 font-bold"
           :validate="isPositiveNumber"
         ></app-click-to-edit>

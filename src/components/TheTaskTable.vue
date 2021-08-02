@@ -41,7 +41,7 @@
             @update:model-value="
               updateTaskPlan(row, value, mapValue ? mapValue($event) : $event)
             "
-            :max-input-width="40"
+            input-class="w-16"
           />
           <span
             v-else
@@ -80,12 +80,16 @@
             @keyup.enter="appendTask"
             ref="appendTaskEl"
           />
-          <button v-show="!!appendTaskName" @click="appendTask">
-            <span class="mdi mdi-keyboard-return"></span>
-          </button>
-          <button v-show="!!appendTaskName" @click="appendTaskCancel">
-            <span class="mdi mdi-keyboard-esc"></span>
-          </button>
+          <app-icon-button
+            v-show="!!appendTaskName"
+            @click="appendTask"
+            icon="mdi-keyboard-return"
+          />
+          <app-icon-button
+            v-show="!!appendTaskName"
+            @click="appendTaskCancel"
+            icon="mdi-keyboard-esc"
+          />
         </td>
         <td v-for="header in headers" :key="header.value"></td>
       </tr>

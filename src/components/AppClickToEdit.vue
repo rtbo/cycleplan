@@ -3,39 +3,39 @@
     v-if="!editing && !forceEditing"
     @mouseover="showPencil = true"
     @mouseleave="showPencil = false"
+    class="cursor-pointer"
     @click="startEditing"
   >
     {{ modelValue }}
-    <button style="cursor: pointer" v-show="keepPencilSpace || showPencil">
-      <span v-show="showPencil" class="mdi mdi-pencil text-on-surface"></span>
-    </button>
+    <app-icon-button v-show="showPencil" icon="mdi-pencil"></app-icon-button>
   </span>
   <span v-else @mouseover="showPencil = true" @mouseleave="showPencil = false">
     <input
       class="bg-transparent border-2 border-gray-400 rounded-md outline-none"
+      :class="computedInputClass"
       v-model="editValue"
       type="text"
       @keydown.esc="cancelEdit"
       @keyup.enter="applyEdit"
       v-focus
-      :style="inputStyle"
     />
-    <button @click="applyEdit" :disabled="!valid">
-      <span class="mdi mdi-keyboard-return text-on-surface"></span>
-    </button>
-    <button @click="cancelEdit">
-      <span class="mdi mdi-keyboard-esc text-on-surface"></span>
-    </button>
+    <app-icon-button
+      @click="applyEdit"
+      :disabled="!valid"
+      icon="mdi-keyboard-return"
+    />
+    <app-icon-button @click="cancelEdit" icon="mdi-keyboard-esc" />
   </span>
 </template>
 
 <script lang="ts">
 import { computed, defineComponent, nextTick, Ref, ref } from "vue";
+import { ensureArray } from "./util";
 
 export default defineComponent({
   props: {
     modelValue: [String, Number],
-    maxInputWidth: Number,
+    inputClass: [String, Array],
     validate: Function,
     forceEditing: Boolean,
     keepPencilSpace: {
@@ -79,22 +79,12 @@ export default defineComponent({
       });
     };
 
-    const maxInputWidthStyle = computed(() =>
-      props.maxInputWidth
-        ? {
-            "max-width": props.maxInputWidth + "px",
-          }
-        : {}
-    );
+    const validRuleClass = computed(() => (valid.value ? [] : ["text-error"]));
 
-    const validRuleStyle = computed(() =>
-      valid.value ? {} : { color: "var(--v-error-base)" }
-    );
-
-    const inputStyle = computed(() => ({
-      ...maxInputWidthStyle.value,
-      ...validRuleStyle.value,
-    }));
+    const computedInputClass = computed(() => [
+      ...validRuleClass.value,
+      ...ensureArray(props.inputClass),
+    ]);
 
     return {
       editing,
@@ -104,7 +94,7 @@ export default defineComponent({
       startEditing,
       applyEdit,
       cancelEdit,
-      inputStyle,
+      computedInputClass,
     };
   },
 });
