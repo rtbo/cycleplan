@@ -3,7 +3,8 @@
     v-if="!editing && !forceEditing"
     @mouseover="showPencil = true"
     @mouseleave="showPencil = false"
-    class="cursor-pointer"
+    class="inline-flex cursor-pointer"
+    :class="spanFlexClass"
     @click="startEditing"
   >
     {{ modelValue }}
@@ -38,6 +39,7 @@ export default defineComponent({
     inputClass: [String, Array],
     validate: Function,
     forceEditing: Boolean,
+    pencilBefore: Boolean,
     keepPencilSpace: {
       type: Boolean,
       default: true,
@@ -79,6 +81,10 @@ export default defineComponent({
       });
     };
 
+    const spanFlexClass = computed(() =>
+      props.pencilBefore ? "flex-row-reverse" : "flex-row"
+    );
+
     const validRuleClass = computed(() => (valid.value ? [] : ["text-error"]));
 
     const computedInputClass = computed(() => [
@@ -94,6 +100,7 @@ export default defineComponent({
       startEditing,
       applyEdit,
       cancelEdit,
+      spanFlexClass,
       computedInputClass,
     };
   },

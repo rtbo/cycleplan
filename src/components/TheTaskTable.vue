@@ -42,6 +42,7 @@
               updateTaskPlan(row, value, mapValue ? mapValue($event) : $event)
             "
             input-class="w-16"
+            pencil-before
           />
           <span
             v-else
