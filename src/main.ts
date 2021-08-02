@@ -7,6 +7,7 @@ import "./index.css";
 import AppClickToEdit from "./components/AppClickToEdit.vue";
 import AppDivider from "./components/AppDivider.vue";
 import AppIconButton from "./components/AppIconButton.vue";
+import AppToggleButton from "./components/AppToggleButton.vue";
 
 const app = createApp(App);
 app.use(konvaPlugin);
@@ -21,6 +22,7 @@ const appComps = {
   AppClickToEdit,
   AppDivider,
   AppIconButton,
+  AppToggleButton,
 };
 Object.entries(appComps).forEach(([name, comp]) => {
   app.component(name, comp);

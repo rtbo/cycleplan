@@ -33,7 +33,10 @@ module.exports = {
 
         "task-bar": colorVarRGB("--color-task-bar"),
         "cycle-time": colorVarRGB("--color-cycle-time"),
-      }
+      },
+      contrast: {
+        25: '25%',
+      },
     },
   },
   variants: {
