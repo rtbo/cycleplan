@@ -9,6 +9,12 @@
       <span>Cycle Time:&nbsp;</span>
       <the-cycle-time-group></the-cycle-time-group>
     </div>
+    <app-divider vertical></app-divider>
+    <div>
+      <app-toggle-button class="w-8 h-8 p-1" v-model="taskInsertMode">
+        <icon-task-insert class="w-6 h-6"></icon-task-insert>
+      </app-toggle-button>
+    </div>
     <div class="flex-grow"></div>
     <app-icon-button
       @click="setDarkMode(dark ? 'light' : 'dark')"
@@ -23,11 +29,12 @@ import { useStore } from "../store";
 import { DarkMode } from "../store/state";
 import { computed, defineComponent } from "vue";
 import TheAppIcon from "../assets/logo.svg?component";
+import IconTaskInsert from "./IconTaskInsert.vue";
 import TheCycleTimeGroup from "./TheCycleTimeGroup.vue";
 import { useDark } from "../app-style";
 
 export default defineComponent({
-  components: { TheAppIcon, TheCycleTimeGroup },
+  components: { IconTaskInsert, TheAppIcon, TheCycleTimeGroup },
   setup() {
     const store = useStore();
 
@@ -41,6 +48,11 @@ export default defineComponent({
       set: (v) => store.commit("edit-mode", v),
     });
 
+    const taskInsertMode = computed({
+      get: () => store.state.editMode === "task-insert",
+      set: (v) => store.commit("edit-mode", v ? "task-insert" : undefined),
+    });
+
     const dark = useDark();
 
     const setDarkMode = (mode: DarkMode) => {
@@ -50,6 +62,7 @@ export default defineComponent({
     return {
       cycleName,
       editMode,
+      taskInsertMode,
       dark,
       setDarkMode,
     };

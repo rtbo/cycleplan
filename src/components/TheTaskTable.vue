@@ -17,8 +17,8 @@
       <tr
         v-for="row in rows"
         :key="row.id"
-        :class="row.insert ? 'insert-row' : 'task-row'"
-        class="border-b border-opacity-75 dark:border-opacity-50 h-10"
+        :class="row.insert ? ['insert-row', 'h-3'] : ['task-row', 'h-10']"
+        class="border-b border-opacity-75 dark:border-opacity-50"
         @mouseover="updateInsertSlot(row.id)"
       >
         <th scope="row" v-if="!row.insert" class="text-left">
@@ -55,6 +55,7 @@
         <td
           v-if="row.insert"
           :colspan="headers.length + 1"
+          class="bg-secondary cursor-pointer"
           @click="insertTask"
         ></td>
       </tr>
