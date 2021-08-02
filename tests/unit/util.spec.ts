@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { isPositiveInt, isPositiveNumber } from "../../src/components/util";
+import { isPositiveInt, isPositiveNumber } from "../../src/util";
 
 describe("Utilities", function () {
   describe("#isPositiveInt", function () {

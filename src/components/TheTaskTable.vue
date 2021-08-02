@@ -116,7 +116,7 @@ import {
   Ref,
   watch,
 } from "vue";
-import { isPositiveInt } from "./util";
+import { isPositiveInt } from "../util";
 import { useStore } from "../store";
 import { TaskState, VerticalBounds } from "../store/state";
 

@@ -43,7 +43,7 @@
 import { computed, defineComponent } from "vue";
 import { CycleTimeMode } from "../model/cycle";
 import { useStore } from "../store";
-import { isPositiveNumber } from "./util";
+import { isPositiveNumber } from "../util";
 
 export default defineComponent({
   setup() {
