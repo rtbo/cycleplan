@@ -7,10 +7,13 @@
 </template>
 
 <script lang="ts">
-import { computed, ComputedRef, defineComponent, inject } from "vue";
+import { computed, ComputedRef, defineComponent } from "vue";
 import { useStore } from "../store";
-import { useAppStyle } from "../app-style";
-import { stageHeightKey, stageWidthKey, useHeaderTheme } from "./gantt";
+import {
+  injectStageHeight,
+  injectStageWidth,
+  useGanttStyle,
+} from "../gantt-style";
 
 const MIN_PX = 50;
 const GRAD_FACTORS = [2, 2.5, 2];
@@ -18,9 +21,9 @@ const GRAD_FACTORS = [2, 2.5, 2];
 export default defineComponent({
   setup() {
     const store = useStore();
-    const appStyle = useAppStyle();
-    const stageWidth = inject(stageWidthKey);
-    const stageHeight = inject(stageHeightKey);
+    const ganttStyle = useGanttStyle();
+    const stageWidth = injectStageWidth();
+    const stageHeight = injectStageHeight();
 
     const interGrad = computed(() => {
       const scale = store.state.timeScale;
@@ -34,7 +37,7 @@ export default defineComponent({
     });
 
     const grads: ComputedRef<{ time: number; px: number }[]> = computed(() => {
-      const width = stageWidth?.value;
+      const width = stageWidth.value;
       const ig = interGrad.value;
       if (!width) return [];
 
@@ -57,15 +60,11 @@ export default defineComponent({
       grads.value.map((grad) => ({
         x: grad.px,
         y: 0,
-        points: [0, 0, 0, stageHeight?.value],
-        stroke: headerTheme.value.gradCol,
+        points: [0, 0, 0, stageHeight.value],
+        stroke: `rgba(${ganttStyle.value.grad}, 0.5)`,
         strokeWidth: 0.5,
       }))
     );
-
-    // watch(gradsLineCfg, () => {
-    //   console.log(gradsLineCfg.value);
-    // });
 
     const gradsTxtCfg = computed(() =>
       grads.value.map((grad) => ({
@@ -75,19 +74,16 @@ export default defineComponent({
         fontSize: 10,
         align: "left",
         verticalAlign: "middle",
-        fill: appStyle.value.textColor,
+        fill: ganttStyle.value.text,
       }))
     );
-
-    //const headerVBounds = computed(() => store.state.headerVBounds);
-    const headerTheme = useHeaderTheme();
 
     const bgRectCfg = computed(() => ({
       x: 0,
       y: 0,
-      width: stageWidth?.value,
+      width: stageWidth.value,
       height: store.getters.headerHeight,
-      fill: headerTheme.value.rulerCol,
+      fill: `rgba(${ganttStyle.value.ruler}, 0.15)`,
     }));
 
     return {

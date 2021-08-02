@@ -31,7 +31,7 @@ import { computed, defineComponent } from "vue";
 import TheAppIcon from "../assets/logo.svg?component";
 import IconTaskInsert from "./IconTaskInsert.vue";
 import TheCycleTimeGroup from "./TheCycleTimeGroup.vue";
-import { useDark } from "../app-style";
+import { useDark } from "../gantt-style";
 
 export default defineComponent({
   components: { IconTaskInsert, TheAppIcon, TheCycleTimeGroup },

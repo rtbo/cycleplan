@@ -6,19 +6,19 @@
 </template>
 
 <script lang="ts">
-import { computed, ComputedRef, defineComponent, inject } from "vue";
+import { computed, ComputedRef, defineComponent } from "vue";
 import { useStore } from "../store";
-import { isAutoCycleTime } from "../model/cycle";
-import { stageHeightKey } from "./gantt";
+import { CycleTimeMode } from "../model/cycle";
+import { injectStageHeight } from "../gantt-style";
 
 export default defineComponent({
   setup() {
     const store = useStore();
-    const stageHeight = inject(stageHeightKey);
+    const stageHeight = injectStageHeight();
 
     const cycleStart: ComputedRef<number> = computed(() => {
       const ct = store.state.cycleTimeInput;
-      if (isAutoCycleTime(ct)) {
+      if (ct.mode === CycleTimeMode.Auto) {
         return store.getters.taskForId(ct.loopIn)?.earlyStart || 0;
       }
       return 0;
@@ -26,7 +26,7 @@ export default defineComponent({
 
     const cycleEnd: ComputedRef<number> = computed(() => {
       const ct = store.state.cycleTimeInput;
-      if (isAutoCycleTime(ct)) {
+      if (ct.mode === CycleTimeMode.Auto) {
         const finish = store.getters.taskForId(ct.loopOut);
         return finish?.earlyFinish as number;
       }
@@ -36,7 +36,7 @@ export default defineComponent({
     const mapCfg = (time: number) => ({
       x: store.getters.time2px(time),
       y: 0,
-      points: [0, 0, 0, stageHeight?.value ?? 100],
+      points: [0, 0, 0, stageHeight.value ?? 100],
       stroke: "#bb2222",
       strokeWidth: 1,
     });

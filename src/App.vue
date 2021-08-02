@@ -27,7 +27,7 @@ import { computed, defineComponent, readonly, ref, watchEffect } from "vue";
 import { Splitpanes, Pane } from "splitpanes";
 import "splitpanes/dist/splitpanes.css";
 import { useStore } from "./store";
-import { provideAppStyle, provideDark } from "./app-style";
+import { provideAppStyle, provideDark } from "./gantt-style";
 import TheGanttStage from "./components/TheGanttStage.vue";
 import TheHeaderBar from "./components/TheHeaderBar.vue";
 import TheTaskTable from "./components/TheTaskTable.vue";

@@ -12,12 +12,12 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onMounted, provide, Ref, ref } from "vue";
+import { computed, defineComponent, onMounted, Ref, ref } from "vue";
 import { useStore } from "../store";
 import TheGanttTimeScale from "./TheGanttTimeScale.vue";
 import TheGanttTaskGroup from "./TheGanttTaskGroup.vue";
 import TheGanttCycleTimeGroup from "./TheGanttCycleTimeGroup.vue";
-import { stageHeightKey, stageWidthKey } from "./gantt";
+import { provideStageHeight, provideStageWidth } from "../gantt-style";
 
 export default defineComponent({
   components: { TheGanttCycleTimeGroup, TheGanttTaskGroup, TheGanttTimeScale },
@@ -47,11 +47,8 @@ export default defineComponent({
       observer.observe(wrapper);
     });
 
-    provide(
-      stageWidthKey,
-      computed(() => width.value)
-    );
-    provide(stageHeightKey, height);
+    provideStageWidth(computed(() => width.value));
+    provideStageHeight(height);
 
     return { wrapperEl, config };
   },

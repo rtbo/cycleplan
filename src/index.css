@@ -20,8 +20,10 @@
     --color-on-surface: 0, 0, 0;
     --color-on-error: 255, 255, 255;
 
-    --color-task-bar: 98, 00, 238;
-    --color-cycle-line: 176, 0, 32;
+    --color-gantt-task-bar: 98, 00, 238;
+    --color-gantt-cycle-line: 176, 0, 32;
+    --color-gantt-ruler: 128, 128, 128;
+    --color-gantt-grad: 128, 128, 128;
   }
 
   :root.dark {
@@ -38,7 +40,7 @@
     --color-on-surface: 255, 255, 255;
     --color-on-error: 0, 0, 0;
 
-    --color-task-bar: 187, 134, 252;
-    --color-cycle-line: 207, 102, 121;
+    --color-gantt-task-bar: 187, 134, 252;
+    --color-gantt-cycle-line: 207, 102, 121;
   }
 }
