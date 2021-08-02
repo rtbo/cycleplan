@@ -19,7 +19,13 @@
         :key="row.id"
         :class="row.insert ? ['insert-row', 'h-3'] : ['task-row', 'h-10']"
         class="border-b border-opacity-75 dark:border-opacity-50"
-        @mouseover="updateInsertSlot(row.id)"
+        v-on="
+          insertMode
+            ? {
+                mousemove: (event) => updateInsertSlot(row, event),
+              }
+            : {}
+        "
       >
         <th scope="row" v-if="!row.insert" class="text-left">
           <app-click-to-edit
@@ -190,11 +196,18 @@ export default defineComponent({
       return tsks;
     });
 
-    const updateInsertSlot = (id: number) => {
-      if (editMode.value != "task-insert") return;
+    const insertMode = computed(() => editMode.value === "task-insert");
+
+    const updateInsertSlot = (
+      { id, vbounds }: TaskState,
+      event: MouseEvent
+    ) => {
       if (id === -1) return;
 
-      insertSlot.value = tasks.value.findIndex((t) => t.id === id);
+      const slt = tasks.value.findIndex((t) => t.id === id);
+
+      const low = (vbounds.bottom - vbounds.top) / 2;
+      insertSlot.value = event.offsetY > low ? slt + 1 : slt;
     };
 
     watch(insertSlot, () => {
@@ -255,6 +268,7 @@ export default defineComponent({
       rows,
 
       insertSlot,
+      insertMode,
       updateInsertSlot,
       insertTask,
 
