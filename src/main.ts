@@ -1,6 +1,5 @@
 import { createApp } from "vue";
 import "@mdi/font/css/materialdesignicons.css";
-import konvaPlugin from "./konva";
 import App from "./App.vue";
 import { key, store } from "./store";
 import "./index.css";
@@ -10,7 +9,6 @@ import AppIconButton from "./components/AppIconButton.vue";
 import AppToggleButton from "./components/AppToggleButton.vue";
 
 const app = createApp(App);
-app.use(konvaPlugin);
 app.use(store, key);
 app.directive("focus", {
   mounted(el) {

@@ -1,19 +1,29 @@
 <template>
-  <kv-group>
-    <kv-rect :config="bgRectCfg"></kv-rect>
-    <kv-line v-for="cfg in gradsLineCfg" :key="cfg.x" :config="cfg"></kv-line>
-    <kv-text v-for="cfg in gradsTxtCfg" :key="cfg.x" :config="cfg"></kv-text>
-  </kv-group>
+  <g>
+    <rect
+      x="0"
+      y="0"
+      :width="stageWidth"
+      :height="headerHeight"
+      class="gantt-header--bg"
+    />
+    <g
+      v-for="grad in grads"
+      :key="grad.time"
+      :transform="`translate(${grad.px} 0)`"
+    >
+      <line x1="0" y1="0" x2="0" :y2="stageHeight" class="gantt-header--grad" />
+      <text x="5" :y="headerHeight - 5" class="gantt-header--text">
+        {{ grad.time }}
+      </text>
+    </g>
+  </g>
 </template>
 
 <script lang="ts">
 import { computed, ComputedRef, defineComponent } from "vue";
+import { injectStageHeight, injectStageWidth } from "../gantt-style";
 import { useStore } from "../store";
-import {
-  injectStageHeight,
-  injectStageWidth,
-  useGanttStyle,
-} from "../gantt-style";
 
 const MIN_PX = 50;
 const GRAD_FACTORS = [2, 2.5, 2];
@@ -21,7 +31,6 @@ const GRAD_FACTORS = [2, 2.5, 2];
 export default defineComponent({
   setup() {
     const store = useStore();
-    const ganttStyle = useGanttStyle();
     const stageWidth = injectStageWidth();
     const stageHeight = injectStageHeight();
 
@@ -56,42 +65,28 @@ export default defineComponent({
       return grds;
     });
 
-    const gradsLineCfg = computed(() =>
-      grads.value.map((grad) => ({
-        x: grad.px,
-        y: 0,
-        points: [0, 0, 0, stageHeight.value],
-        stroke: `rgba(${ganttStyle.value.grad}, 0.5)`,
-        strokeWidth: 0.5,
-      }))
-    );
-
-    const gradsTxtCfg = computed(() =>
-      grads.value.map((grad) => ({
-        x: grad.px + 6,
-        y: store.getters.headerHeight / 2,
-        text: grad.time,
-        fontSize: 10,
-        align: "left",
-        verticalAlign: "middle",
-        fill: ganttStyle.value.text,
-      }))
-    );
-
-    const bgRectCfg = computed(() => ({
-      x: 0,
-      y: 0,
-      width: stageWidth.value,
-      height: store.getters.headerHeight,
-      fill: `rgba(${ganttStyle.value.ruler}, 0.15)`,
-    }));
+    const headerHeight = computed(() => store.getters.headerHeight);
 
     return {
       grads,
-      bgRectCfg,
-      gradsLineCfg,
-      gradsTxtCfg,
+      stageWidth,
+      stageHeight,
+      headerHeight,
     };
   },
 });
 </script>
+
+<style lang="postcss">
+.gantt-header--bg {
+  fill: rgba(var(--color-gantt-ruler), 0.15);
+}
+.gantt-header--grad {
+  stroke: rgba(var(--color-gantt-grad), 0.5);
+  stroke-width: 0.5;
+}
+.gantt-header--text {
+  fill: rgba(var(--color-on-surface), 1);
+  @apply text-sm;
+}
+</style>

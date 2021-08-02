@@ -15,7 +15,7 @@
           <the-task-table></the-task-table>
         </pane>
         <pane :size="100 - panePos">
-          <the-gantt-stage></the-gantt-stage>
+          <gantt-stage></gantt-stage>
         </pane>
       </splitpanes>
     </main>
@@ -28,7 +28,7 @@ import { Splitpanes, Pane } from "splitpanes";
 import "splitpanes/dist/splitpanes.css";
 import { useStore } from "./store";
 import { provideAppStyle, provideDark } from "./gantt-style";
-import TheGanttStage from "./components/TheGanttStage.vue";
+import GanttStage from "./components/GanttStage.vue";
 import TheHeaderBar from "./components/TheHeaderBar.vue";
 import TheTaskTable from "./components/TheTaskTable.vue";
 
@@ -44,7 +44,7 @@ function prefersDarkColorScheme() {
 export default defineComponent({
   name: "App",
 
-  components: { Pane, Splitpanes, TheGanttStage, TheHeaderBar, TheTaskTable },
+  components: { Pane, Splitpanes, GanttStage, TheHeaderBar, TheTaskTable },
 
   setup() {
     const store = useStore();
