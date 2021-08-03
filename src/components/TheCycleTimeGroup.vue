@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-row cursor-pointer">
+  <div class="flex flex-row">
     <div
       class="pl-3 pr-2 py-1 rounded-tl-md"
       :class="autoClasses"
@@ -73,12 +73,16 @@ export default defineComponent({
       "border-opacity-50",
     ];
     const inactiveClasses = [
+      "cursor-pointer",
       "bg-on-surface",
       "bg-opacity-5",
-      "hover:bg-opacity-10",
+      "border-opacity-0",
+      "hover:bg-opacity-20",
       "hover:border-1",
       "hover:border-on-surface",
-      "hover:border-opacity-20",
+      "hover:border-opacity-50",
+      "transition",
+      "duration-200",
     ];
 
     const autoActive = computed(() => activeMode.value === CycleTimeMode.Auto);
