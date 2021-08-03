@@ -1,7 +1,17 @@
 <template>
   <div ref="wrapperEl">
     <svg :width="width" :height="height" :viewBox="`0 0 ${width} ${height}`">
+      <defs>
+        <path id="gantt-def--link-arrow" d="M 0 0 L 2.5 -8 L -2.5 -8" />
+      </defs>
       <gantt-header />
+      <g>
+        <gantt-link
+          v-for="link in links"
+          :key="`${link.from}.${link.to}`"
+          :model-value="link"
+        />
+      </g>
       <gantt-task-group />
       <gantt-cycle-time-group />
     </svg>
@@ -14,10 +24,11 @@ import { provideStageHeight, provideStageWidth } from "@/gantt-style";
 import { useStore } from "@/store";
 import GanttCycleTimeGroup from "./GanttCycleTimeGroup.vue";
 import GanttHeader from "./GanttHeader.vue";
+import GanttLink from "./GanttLink.vue";
 import GanttTaskGroup from "./GanttTaskGroup.vue";
 
 export default defineComponent({
-  components: { GanttCycleTimeGroup, GanttHeader, GanttTaskGroup },
+  components: { GanttCycleTimeGroup, GanttHeader, GanttLink, GanttTaskGroup },
   setup() {
     const store = useStore();
 
@@ -42,10 +53,13 @@ export default defineComponent({
     provideStageWidth(computed(() => width.value));
     provideStageHeight(height);
 
+    const links = computed(() => store.state.links);
+
     return {
       wrapperEl,
       width,
       height,
+      links,
     };
   },
 });

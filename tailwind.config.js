@@ -30,11 +30,6 @@ module.exports = {
         "on-background": colorVarRGB("--color-on-background"),
         "on-surface": colorVarRGB("--color-on-surface"),
         "on-error": colorVarRGB("--color-on-error"),
-
-        "gantt-task-bar": colorVarRGB("--color-gantt-task-bar"),
-        "gantt-cycle-time": colorVarRGB("--color-gantt-cycle-time"),
-        "gantt-ruler": colorVarRGB("--color-gantt-ruler"),
-        "gantt-grad": colorVarRGB("--color-gantt-grad"),
       },
       contrast: {
         25: '25%',
