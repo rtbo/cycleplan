@@ -1,5 +1,5 @@
-import { AtomTask, Cycle, planCycle, Task } from "../../src/model/cycle";
 import { expect } from "chai";
+import { AtomTask, Cycle, planCycle, Task } from "@/model/cycle";
 
 describe("Basic cycle", function () {
   let cycle: Cycle;

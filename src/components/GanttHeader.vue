@@ -22,8 +22,8 @@
 
 <script lang="ts">
 import { computed, ComputedRef, defineComponent } from "vue";
-import { injectStageHeight, injectStageWidth } from "../gantt-style";
-import { useStore } from "../store";
+import { injectStageHeight, injectStageWidth } from "@/gantt-style";
+import { useStore } from "@/store";
 
 const MIN_PX = 50;
 const GRAD_FACTORS = [2, 2.5, 2];

@@ -7,7 +7,7 @@
     "build": "vite build",
     "lint": "eslint . --ext .js,.ts,.vue",
     "lint:fix": "eslint . --ext .js,.ts,.vue --fix",
-    "test": "ts-mocha -p tsconfig.test.json src/**/*.spec.ts tests/unit/**/*.ts",
+    "test": "ts-mocha -p tsconfig.test.json -r tsconfig-paths/register src/**/*.spec.ts tests/unit/**/*.ts",
     "dev": "vite"
   },
   "dependencies": {
@@ -34,6 +34,7 @@
     "autoprefixer": "^10.3.1",
     "chai": "^4.1.2",
     "eslint": "^6.7.2",
+    "eslint-plugin-import": "^2.23.4",
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-vue": "^6.2.2",
     "mocha": "^9.0.3",
@@ -41,6 +42,7 @@
     "prettier": "^2.2.1",
     "tailwindcss": "^2.2.7",
     "ts-mocha": "^8.0.0",
+    "tsconfig-paths": "^3.10.1",
     "typescript": "~4.1.5",
     "vite": "^2.4.2",
     "vite-svg-loader": "^2.1.0",

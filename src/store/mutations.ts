@@ -1,3 +1,4 @@
+import { planStateCycle } from "./algo";
 import {
   EditMode,
   State,
@@ -7,7 +8,6 @@ import {
   CycleTimeInput,
   DarkMode,
 } from "./state";
-import { planStateCycle } from "./algo";
 
 export type MutationTypes =
   | "edit-mode"

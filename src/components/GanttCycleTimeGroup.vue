@@ -19,9 +19,9 @@
 
 <script lang="ts">
 import { computed, ComputedRef, defineComponent } from "vue";
-import { injectStageHeight } from "../gantt-style";
-import { useStore } from "../store";
-import { CycleTimeMode } from "../model/cycle";
+import { injectStageHeight } from "@/gantt-style";
+import { CycleTimeMode } from "@/model/cycle";
+import { useStore } from "@/store";
 
 export default defineComponent({
   setup() {

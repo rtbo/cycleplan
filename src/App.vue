@@ -23,14 +23,14 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, readonly, ref, watchEffect } from "vue";
 import { Splitpanes, Pane } from "splitpanes";
+import { computed, defineComponent, readonly, ref, watchEffect } from "vue";
 import "splitpanes/dist/splitpanes.css";
-import { useStore } from "./store";
-import { provideAppStyle, provideDark } from "./gantt-style";
 import GanttStage from "./components/GanttStage.vue";
 import TheHeaderBar from "./components/TheHeaderBar.vue";
 import TheTaskTable from "./components/TheTaskTable.vue";
+import { provideAppStyle, provideDark } from "./gantt-style";
+import { useStore } from "./store";
 
 function prefersDarkColorScheme() {
   const mq = window.matchMedia("(prefers-color-scheme: dark)");

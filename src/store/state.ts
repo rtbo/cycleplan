@@ -1,4 +1,4 @@
-import { CycleTimeMode } from "../model/cycle";
+import { CycleTimeMode } from "@/model/cycle";
 import { planStateCycle } from "./algo";
 import { makeNewTask } from "./mutations";
 

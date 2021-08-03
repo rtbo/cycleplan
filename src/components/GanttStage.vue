@@ -10,8 +10,8 @@
 
 <script lang="ts">
 import { computed, defineComponent, onMounted, ref, Ref } from "vue";
-import { useStore } from "../store";
-import { provideStageHeight, provideStageWidth } from "../gantt-style";
+import { provideStageHeight, provideStageWidth } from "@/gantt-style";
+import { useStore } from "@/store";
 import GanttCycleTimeGroup from "./GanttCycleTimeGroup.vue";
 import GanttHeader from "./GanttHeader.vue";
 import GanttTaskGroup from "./GanttTaskGroup.vue";

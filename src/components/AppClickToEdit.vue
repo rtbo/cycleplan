@@ -31,7 +31,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, nextTick, Ref, ref } from "vue";
-import { ensureArray } from "../util";
+import { ensureArray } from "@/util";
 
 export default defineComponent({
   props: {

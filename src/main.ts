@@ -1,12 +1,12 @@
 import { createApp } from "vue";
 import "@mdi/font/css/materialdesignicons.css";
 import App from "./App.vue";
-import { key, store } from "./store";
 import "./index.css";
 import AppClickToEdit from "./components/AppClickToEdit.vue";
 import AppDivider from "./components/AppDivider.vue";
 import AppIconButton from "./components/AppIconButton.vue";
 import AppToggleButton from "./components/AppToggleButton.vue";
+import { key, store } from "./store";
 
 const app = createApp(App);
 app.use(store, key);

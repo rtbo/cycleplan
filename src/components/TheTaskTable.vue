@@ -116,9 +116,9 @@ import {
   Ref,
   watch,
 } from "vue";
-import { isPositiveInt } from "../util";
-import { useStore } from "../store";
-import { TaskState, VerticalBounds } from "../store/state";
+import { useStore } from "@/store";
+import { TaskState, VerticalBounds } from "@/store/state";
+import { isPositiveInt } from "@/util";
 
 function elVerticalBounds(el: Element, offset = 0): VerticalBounds {
   const rect = el.getBoundingClientRect();

@@ -13,9 +13,9 @@
 </template>
 
 <script lang="ts">
-import { useStore } from "../store";
 import { computed, defineComponent } from "vue";
-import { TASKBAR_HEIGHT } from "../gantt-style";
+import { TASKBAR_HEIGHT } from "@/gantt-style";
+import { useStore } from "@/store";
 
 export default defineComponent({
   setup() {

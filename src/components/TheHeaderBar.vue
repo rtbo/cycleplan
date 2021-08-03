@@ -25,13 +25,13 @@
 </template>
 
 <script lang="ts">
-import { useStore } from "../store";
-import { DarkMode } from "../store/state";
-import { computed, defineComponent } from "vue";
-import TheAppIcon from "../assets/logo.svg?component";
+import { defineComponent, computed } from "vue";
+import TheAppIcon from "@/assets/logo.svg?component";
+import { useDark } from "@/gantt-style";
+import { useStore } from "@/store";
+import { DarkMode } from "@/store/state";
 import IconTaskInsert from "./IconTaskInsert.vue";
 import TheCycleTimeGroup from "./TheCycleTimeGroup.vue";
-import { useDark } from "../gantt-style";
 
 export default defineComponent({
   components: { IconTaskInsert, TheAppIcon, TheCycleTimeGroup },
