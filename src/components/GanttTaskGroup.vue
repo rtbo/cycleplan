@@ -15,8 +15,7 @@
 <script lang="ts">
 import { useStore } from "../store";
 import { computed, defineComponent } from "vue";
-
-const HEIGHT = 20;
+import { TASKBAR_HEIGHT } from "../gantt-style";
 
 export default defineComponent({
   setup() {
@@ -28,9 +27,9 @@ export default defineComponent({
         return {
           vforKey: task.id,
           x: store.getters.time2px(task.earlyStart),
-          y: middle - HEIGHT / 2,
+          y: middle - TASKBAR_HEIGHT / 2,
           w: store.state.timeScale * task.duration,
-          h: HEIGHT,
+          h: TASKBAR_HEIGHT,
           style: {
             fill: task.color || "rgb(var(--color-gantt-task-bar))",
           },

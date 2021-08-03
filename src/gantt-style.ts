@@ -9,11 +9,12 @@ export interface GanttStyle {
   text: string;
 }
 
+export const TASKBAR_HEIGHT = 20;
+
 const darkKey: InjectionKey<ComputedRef<boolean>> = Symbol();
 const appStyleKey: InjectionKey<ComputedRef<GanttStyle>> = Symbol();
 const stageWidthKey: InjectionKey<ComputedRef<number>> = Symbol();
 const stageHeightKey: InjectionKey<ComputedRef<number>> = Symbol();
-
 
 export function provideDark(dark: ComputedRef<boolean>): void {
   provide(darkKey, dark);
