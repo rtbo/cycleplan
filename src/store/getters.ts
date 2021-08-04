@@ -27,6 +27,9 @@ export const getters = {
     (id: number | undefined): TaskState | undefined =>
       id === undefined ? undefined : state.tasks.find((t) => t.id === id),
 
+  selectedTasks: (state: State): number[] =>
+    state.tasks.filter((t) => t.selected).map((t) => t.id),
+
   vbounds: (state: State): VerticalBounds => {
     const header = state.headerVBounds;
     if (!state.tasks.length) return header;

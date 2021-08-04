@@ -14,6 +14,7 @@ export interface VerticalBounds {
 
 export interface TaskState {
   id: number;
+  selected: boolean;
   name: string;
   duration: number;
   earlyStart: number;

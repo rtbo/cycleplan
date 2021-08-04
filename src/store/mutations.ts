@@ -26,6 +26,7 @@ export function makeNewTask(input: NewTaskInput): TaskState {
   const duration = input.duration || 1;
   return {
     id: newId(),
+    selected: false,
     name,
     earlyStart: 0,
     earlyFinish: duration,
@@ -45,6 +46,20 @@ export function makeNewTask(input: NewTaskInput): TaskState {
 export const mutations = {
   "edit-mode": (state: State, value: EditMode): void => {
     state.editMode = value;
+  },
+
+  "selected-tasks": (state: State, value: number[]): void => {
+    state.tasks.forEach((t) => {
+      t.selected = value.includes(t.id);
+    });
+  },
+
+  "select-task": (
+    state: State,
+    { id, selected }: { id: number; selected: boolean }
+  ): void => {
+    const t = state.tasks.find((t) => t.id === id);
+    if (t) t.selected = selected;
   },
 
   "dark-mode": (state: State, value: DarkMode): void => {
