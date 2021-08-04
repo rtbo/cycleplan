@@ -27,6 +27,11 @@ export default defineComponent({
   setup(props) {
     const store = useStore();
 
+    const nlag = computed(() => {
+      const link = props.modelValue;
+      return link.lag < 0;
+    });
+
     const config = computed(() => {
       const link = props.modelValue;
       if (link.from === link.to) throw new Error("Impossible Link");
@@ -47,16 +52,21 @@ export default defineComponent({
         ? middleFrom + TASKBAR_HEIGHT / 2
         : middleFrom - TASKBAR_HEIGHT / 2;
 
-      const hor = timeFrom - timeTo;
+      const hor = timeTo - timeFrom;
       const slack = hor - link.lag;
       const direct = link.lag === 0 && slack == 0;
 
       const middleTo = (taskTo.vbounds.top + taskTo.vbounds.bottom) / 2;
       let yTo;
       if (link.lag > 0 || slack > 0) {
+        if (nlag.value) {
+          console.log("middle " + slack);
+        }
         yTo = middleTo;
       } else {
-        // 4 offset to be within the arrow
+        if (nlag.value) {
+          console.log("not middle");
+        }
         yTo = down
           ? middleTo - TASKBAR_HEIGHT / 2
           : middleTo + TASKBAR_HEIGHT / 2;
@@ -140,15 +150,18 @@ export default defineComponent({
 
 <style lang="postcss">
 .gantt-link--main {
+  fill: none;
   stroke: rgb(var(--color-gantt-link));
   stroke-width: 1.5;
 }
 .gantt-link--slack {
-  stroke: rgb(var(--color-gantt-link--slack));
+  fill: none;
+  stroke: rgba(var(--color-gantt-link--slack), 0.4);
   stroke-dasharray: 4;
   stroke-width: 1.5;
 }
 .gantt-link--arrow {
+  stroke: none;
   fill: rgb(var(--color-gantt-link));
 }
 </style>
