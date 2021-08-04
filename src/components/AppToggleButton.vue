@@ -9,6 +9,9 @@
       hover:border-opacity-20
       transition
       duration-200
+      flex
+      items-center
+      justify-center
     "
     :class="opacityClass"
     @click="toggle"

@@ -3,6 +3,26 @@
     <table id="task-table" class="table-auto w-full">
       <thead>
         <tr class="border-b border-opacity-75 dark:border-opacity-50 h-12">
+          <th v-if="deleteMode" class="px-1 text-center">
+            <button
+              :disabled="selectedTasks.length === 0"
+              class="
+                rounded-md
+                px-2
+                font-bold
+                bg-red-600
+                dark:bg-red-400
+                text-on-error
+                opacity-80
+                hover:opacity-100
+                disabled:opacity-50
+                transition
+                duration-200
+                mdi mdi-trash-can
+              "
+              @click="deleteSelected"
+            ></button>
+          </th>
           <th scope="col" class="text-left">Name</th>
           <th
             v-for="header in headers"
@@ -28,6 +48,9 @@
               : {}
           "
         >
+          <td v-if="deleteMode" class="text-center">
+            <input type="checkbox" v-model="selectedTasks" :value="row.id" />
+          </td>
           <th scope="row" v-if="!row.insert" class="text-left">
             <app-click-to-edit
               :model-value="row.name"
@@ -72,6 +95,7 @@
           class="h-10"
           @mouseenter="insertSlot = undefined"
         >
+          <td v-if="deleteMode"></td>
           <td>
             <input
               placeholder="Append Task here"
@@ -181,10 +205,12 @@ export default defineComponent({
     };
 
     const editMode = computed(() => store.state.editMode);
-
-    const insertSlot: Ref<undefined | number> = ref(undefined);
+    const insertMode = computed(() => editMode.value === "task-insert");
+    const deleteMode = computed(() => editMode.value === "task-delete");
 
     const tasks = computed(() => store.state.tasks);
+
+    const insertSlot: Ref<undefined | number> = ref(undefined);
 
     const rows: ComputedRef<Row[]> = computed(() => {
       const tsks: Row[] = tasks.value;
@@ -197,8 +223,6 @@ export default defineComponent({
       }
       return tsks;
     });
-
-    const insertMode = computed(() => editMode.value === "task-insert");
 
     const updateInsertSlot = (
       { id, vbounds }: TaskState,
@@ -263,11 +287,23 @@ export default defineComponent({
       });
     };
 
+    const selectedTasks = computed({
+      get: () => store.getters.selectedTasks,
+      set(value: number[]) {
+        store.commit("selected-tasks", value);
+      },
+    });
+    const deleteSelected = () => {
+      store.commit("delete-tasks", selectedTasks.value);
+    };
+
     onMounted(updateVerticalGeometry);
 
     return {
       headers,
       rows,
+
+      editMode,
 
       insertSlot,
       insertMode,
@@ -280,6 +316,10 @@ export default defineComponent({
       appendTaskCancel,
       updateTask,
       updateTaskPlan,
+
+      deleteMode,
+      selectedTasks,
+      deleteSelected,
     };
   },
 });

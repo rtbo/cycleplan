@@ -35,7 +35,7 @@ export interface LinkState {
   lag: number;
 }
 
-export type EditMode = undefined | "task-insert";
+export type EditMode = undefined | "task-insert" | "task-delete";
 
 export type DarkMode = "media" | "light" | "dark";
 

@@ -10,9 +10,14 @@
       <the-cycle-time-group></the-cycle-time-group>
     </div>
     <app-divider vertical></app-divider>
-    <div>
-      <app-toggle-button class="w-8 h-8 p-1" v-model="taskInsertMode">
-        <icon-task-insert class="w-6 h-6"></icon-task-insert>
+    <div class="flex flex-row items-center">
+      <app-toggle-button class="w-8 h-8" v-model="taskInsertMode">
+        <icon-task-insert class="w-5 h-5"></icon-task-insert>
+      </app-toggle-button>
+      <app-toggle-button class="w-8 h-8" v-model="taskDeleteMode">
+        <span
+          class="mdi mdi-trash-can text-xl text-red-600 dark:text-red-400"
+        ></span>
       </app-toggle-button>
     </div>
     <div class="flex-grow"></div>
@@ -53,6 +58,11 @@ export default defineComponent({
       set: (v) => store.commit("edit-mode", v ? "task-insert" : undefined),
     });
 
+    const taskDeleteMode = computed({
+      get: () => store.state.editMode === "task-delete",
+      set: (v) => store.commit("edit-mode", v ? "task-delete" : undefined),
+    });
+
     const dark = useDark();
 
     const setDarkMode = (mode: DarkMode) => {
@@ -63,6 +73,7 @@ export default defineComponent({
       cycleName,
       editMode,
       taskInsertMode,
+      taskDeleteMode,
       dark,
       setDarkMode,
     };

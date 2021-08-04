@@ -133,6 +133,19 @@ export const mutations = {
     state.tasks[ind] = updated;
     planStateCycle(state);
   },
+
+  "delete-tasks": (state: State, ids: number[]): void => {
+    state.tasks = state.tasks.filter((t) => !ids.includes(t.id));
+    state.links = state.links.filter((l) => {
+      for (const id of ids) {
+        if (l.from === id || l.to === id) {
+          return false;
+        }
+      }
+      return true;
+    });
+    planStateCycle(state);
+  },
 };
 
 export type Mutations = typeof mutations;
