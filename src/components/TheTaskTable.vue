@@ -1,108 +1,110 @@
 <template>
-  <table id="task-table" class="mx-1 table-auto w-full">
-    <thead>
-      <tr class="border-b border-opacity-75 dark:border-opacity-50 h-12">
-        <th scope="col" class="text-left">Name</th>
-        <th
-          v-for="header in headers"
-          :key="header.value"
-          scope="col"
-          class="px-3"
-        >
-          {{ header.text }}
-        </th>
-      </tr>
-    </thead>
-    <tbody @mouseleave="insertSlot = undefined">
-      <tr
-        v-for="row in rows"
-        :key="row.id"
-        :class="row.insert ? ['insert-row', 'h-3'] : ['task-row', 'h-10']"
-        class="border-b border-opacity-75 dark:border-opacity-50"
-        v-on="
-          insertMode
-            ? {
-                mousemove: (event) => updateInsertSlot(row, event),
-              }
-            : {}
-        "
-      >
-        <th scope="row" v-if="!row.insert" class="text-left">
-          <app-click-to-edit
-            :model-value="row.name"
-            @update:model-value="updateTask(row, 'name', $event)"
-          />
-        </th>
-        <!-- eslint-disable vue/no-use-v-if-with-v-for -->
-        <td
-          v-if="!row.insert"
-          v-for="{ editable, mapValue, value, validate } in headers"
-          :key="value"
-          class="text-right px-3"
-        >
-          <app-click-to-edit
-            v-if="editable"
-            :model-value="row[value]"
-            :validate="validate"
-            @update:model-value="
-              updateTaskPlan(row, value, mapValue ? mapValue($event) : $event)
-            "
-            input-class="w-16 text-right"
-            pencil-before
-          />
-          <span
-            v-else
-            :class="{ 'error-text': validate && !validate(row[value]) }"
+  <div class="overflow-x-auto h-full px-1">
+    <table id="task-table" class="table-auto w-full">
+      <thead>
+        <tr class="border-b border-opacity-75 dark:border-opacity-50 h-12">
+          <th scope="col" class="text-left">Name</th>
+          <th
+            v-for="header in headers"
+            :key="header.value"
+            scope="col"
+            class="px-3"
           >
-            {{ row[value] }}
-          </span>
-        </td>
-        <!-- The insert slot is here -->
-        <td
-          v-if="row.insert"
-          :colspan="headers.length + 1"
-          class="bg-secondary cursor-pointer"
-          @click="insertTask"
-        ></td>
-      </tr>
-      <!-- The next and last row is used to append tasks at the end of the task list -->
-      <tr
-        id="append-task-row"
-        class="h-10"
-        @mouseenter="insertSlot = undefined"
-      >
-        <td>
-          <input
-            placeholder="Append Task here"
-            class="
-              bg-on-surface bg-opacity-5
-              outline-none
-              ring-1 ring-on-surface ring-opacity-20
-              rounded-sm
-              text-on-surface text-opacity-80
-              placeholder-on-surface placeholder-opacity-20
-              focus:bg-opacity-10 focus:ring-opacity-50 focus:ring-2
-            "
-            v-model="appendTaskName"
-            @keydown.esc="appendTaskCancel"
-            @keyup.enter="appendTask"
-            ref="appendTaskEl"
-          />
-          <app-icon-button
-            v-show="!!appendTaskName"
-            @click="appendTask"
-            icon="mdi-keyboard-return"
-          />
-          <app-icon-button
-            v-show="!!appendTaskName"
-            @click="appendTaskCancel"
-            icon="mdi-keyboard-esc"
-          />
-        </td>
-        <td v-for="header in headers" :key="header.value"></td>
-      </tr>
-    </tbody>
-  </table>
+            {{ header.text }}
+          </th>
+        </tr>
+      </thead>
+      <tbody @mouseleave="insertSlot = undefined">
+        <tr
+          v-for="row in rows"
+          :key="row.id"
+          :class="row.insert ? ['insert-row', 'h-3'] : ['task-row', 'h-10']"
+          class="border-b border-opacity-75 dark:border-opacity-50"
+          v-on="
+            insertMode
+              ? {
+                  mousemove: (event) => updateInsertSlot(row, event),
+                }
+              : {}
+          "
+        >
+          <th scope="row" v-if="!row.insert" class="text-left">
+            <app-click-to-edit
+              :model-value="row.name"
+              @update:model-value="updateTask(row, 'name', $event)"
+            />
+          </th>
+          <!-- eslint-disable vue/no-use-v-if-with-v-for -->
+          <td
+            v-if="!row.insert"
+            v-for="{ editable, mapValue, value, validate } in headers"
+            :key="value"
+            class="text-right px-3"
+          >
+            <app-click-to-edit
+              v-if="editable"
+              :model-value="row[value]"
+              :validate="validate"
+              @update:model-value="
+                updateTaskPlan(row, value, mapValue ? mapValue($event) : $event)
+              "
+              input-class="w-16 text-right"
+              pencil-before
+            />
+            <span
+              v-else
+              :class="{ 'error-text': validate && !validate(row[value]) }"
+            >
+              {{ row[value] }}
+            </span>
+          </td>
+          <!-- The insert slot is here -->
+          <td
+            v-if="row.insert"
+            :colspan="headers.length + 1"
+            class="bg-secondary cursor-pointer"
+            @click="insertTask"
+          ></td>
+        </tr>
+        <!-- The next and last row is used to append tasks at the end of the task list -->
+        <tr
+          id="append-task-row"
+          class="h-10"
+          @mouseenter="insertSlot = undefined"
+        >
+          <td>
+            <input
+              placeholder="Append Task here"
+              class="
+                bg-on-surface bg-opacity-5
+                outline-none
+                ring-1 ring-on-surface ring-opacity-20
+                rounded-sm
+                text-on-surface text-opacity-80
+                placeholder-on-surface placeholder-opacity-20
+                focus:bg-opacity-10 focus:ring-opacity-50 focus:ring-2
+              "
+              v-model="appendTaskName"
+              @keydown.esc="appendTaskCancel"
+              @keyup.enter="appendTask"
+              ref="appendTaskEl"
+            />
+            <app-icon-button
+              v-show="!!appendTaskName"
+              @click="appendTask"
+              icon="mdi-keyboard-return"
+            />
+            <app-icon-button
+              v-show="!!appendTaskName"
+              @click="appendTaskCancel"
+              icon="mdi-keyboard-esc"
+            />
+          </td>
+          <td v-for="header in headers" :key="header.value"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </template>
 
 <script lang="ts">
