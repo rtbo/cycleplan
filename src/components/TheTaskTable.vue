@@ -47,7 +47,7 @@
             @update:model-value="
               updateTaskPlan(row, value, mapValue ? mapValue($event) : $event)
             "
-            input-class="w-16"
+            input-class="w-16 text-right"
             pencil-before
           />
           <span
