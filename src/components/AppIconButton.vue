@@ -1,5 +1,9 @@
 <template>
-  <button :class="dynClasses" class="transition duration-300">
+  <button
+    :class="dynClasses"
+    class="transition duration-300"
+    :disabled="disabled"
+  >
     <span class="mdi" :class="icon"></span>
   </button>
 </template>
@@ -37,15 +41,26 @@ export default defineComponent({
       },
       default: ["text-opacity-70", "hover:text-opacity-100"],
     },
+    disabled: Boolean,
   },
 
-  setup(props) {
+  setup(props, { emit }) {
+    const clickHandler = (event: MouseEvent) => {
+      if (!props.disabled) {
+        emit("click", event);
+      }
+    };
+
     const dynClasses = computed(() => {
       const cc = ensureArray(props.colorClass);
-      const oc = ensureArray(props.opacityClass);
+      const oc = props.disabled
+        ? ["text-opacity-30"]
+        : ensureArray(props.opacityClass);
       return [...cc, ...oc];
     });
+
     return {
+      clickHandler,
       dynClasses,
     };
   },
