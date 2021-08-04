@@ -6,6 +6,7 @@
 
 <script lang="ts">
 import { computed, defineComponent } from "vue";
+import { ensureArray } from "@/util";
 
 export default defineComponent({
   props: {
@@ -37,16 +38,11 @@ export default defineComponent({
       default: ["text-opacity-70", "hover:text-opacity-100"],
     },
   },
+
   setup(props) {
     const dynClasses = computed(() => {
-      let cc = props.colorClass;
-      if (typeof cc === "string") {
-        cc = [cc];
-      }
-      let oc = props.opacityClass;
-      if (typeof oc === "string") {
-        oc = [oc];
-      }
+      const cc = ensureArray(props.colorClass);
+      const oc = ensureArray(props.opacityClass);
       return [...cc, ...oc];
     });
     return {
