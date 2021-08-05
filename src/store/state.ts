@@ -59,6 +59,7 @@ export interface State {
   cycleTimeInput: CycleTimeInput;
   cycleTime: number;
 
+  currentTaskId: number | undefined;
   darkMode: DarkMode;
   headerVBounds: VerticalBounds;
   panePos: number;
@@ -121,6 +122,7 @@ export function createState(): State {
     },
     cycleTime: 13,
 
+    currentTaskId: undefined,
     darkMode: (localStorage.getItem("dark-mode") as DarkMode) || "media",
     panePos: 33,
     editMode: undefined,

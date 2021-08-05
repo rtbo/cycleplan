@@ -48,6 +48,10 @@ export const mutations = {
     state.editMode = value;
   },
 
+  "current-task": (state: State, currentId: number | undefined): void => {
+    state.currentTaskId = currentId;
+  },
+
   "selected-tasks": (state: State, value: number[]): void => {
     state.tasks.forEach((t) => {
       t.selected = value.includes(t.id);
@@ -144,6 +148,10 @@ export const mutations = {
       }
       return true;
     });
+
+    if (state.currentTaskId && ids.includes(state.currentTaskId))
+      state.currentTaskId = undefined;
+
     planStateCycle(state);
   },
 };

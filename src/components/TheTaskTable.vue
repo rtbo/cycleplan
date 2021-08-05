@@ -25,15 +25,9 @@
         <tr
           v-for="row in rows"
           :key="row.id"
-          :class="row.insert ? ['insert-row', 'h-3'] : ['task-row', 'h-10']"
           class="border-b border-opacity-75 dark:border-opacity-50"
-          v-on="
-            insertMode
-              ? {
-                  mousemove: (event) => updateInsertSlot(row, event),
-                }
-              : {}
-          "
+          :class="rowDynClasses(row)"
+          v-on="rowDynHandlers(row)"
         >
           <td v-if="deleteMode" class="text-center">
             <input type="checkbox" v-model="selectedTasks" :value="row.id" />
@@ -144,6 +138,10 @@ function elVerticalBounds(el: Element, offset = 0): VerticalBounds {
 type InsertRow = { id: -1; insert: true };
 type Row = InsertRow | TaskState;
 
+function isInsertRow(row: Row): row is InsertRow {
+  return (row as InsertRow).insert === true;
+}
+
 export default defineComponent({
   setup() {
     const store = useStore();
@@ -217,6 +215,36 @@ export default defineComponent({
       }
       return tsks;
     });
+
+    const rowDynClasses = (row: Row) => {
+      if (isInsertRow(row)) {
+        return ["insert-row", "h-3"];
+      } else {
+        const classes = ["task-row", "h-10", "bg-primary"];
+        if (store.state.currentTaskId === row.id) {
+          classes.push("bg-opacity-20");
+        } else {
+          classes.push("bg-opacity-0", "hover:bg-opacity-10");
+        }
+        return classes;
+      }
+    };
+
+    const rowDynHandlers = (row: Row) => {
+      const handlers: {
+        click?: () => void;
+        mousemove?: (ev: MouseEvent) => void;
+      } = {};
+
+      if (!isInsertRow(row)) {
+        handlers.click = () => store.commit("current-task", row.id);
+
+        if (insertMode.value) {
+          handlers.mousemove = (event) => updateInsertSlot(row, event);
+        }
+      }
+      return handlers;
+    };
 
     const updateInsertSlot = (
       { id, vbounds }: TaskState,
@@ -292,6 +320,8 @@ export default defineComponent({
     return {
       headers,
       rows,
+      rowDynClasses,
+      rowDynHandlers,
 
       selectedTasks,
 

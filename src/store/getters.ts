@@ -27,6 +27,11 @@ export const getters = {
     (id: number | undefined): TaskState | undefined =>
       id === undefined ? undefined : state.tasks.find((t) => t.id === id),
 
+  currentTask: (state: State): TaskState | undefined => {
+    if (state.currentTaskId === undefined) return undefined;
+    return state.tasks.find((t) => t.id === state.currentTaskId);
+  },
+
   selectedTasks: (state: State): number[] =>
     state.tasks.filter((t) => t.selected).map((t) => t.id),
 
