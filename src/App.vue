@@ -15,7 +15,35 @@
           <the-task-table></the-task-table>
         </pane>
         <pane :size="100 - panePos">
-          <gantt-stage></gantt-stage>
+          <div class="flex flex-row h-full flex-nowrap">
+            <div class="relative h-full flex-grow overflow-hidden">
+              <gantt-stage></gantt-stage>
+              <button
+                class="
+                  rounded-full
+                  w-10
+                  h-10
+                  bg-primary bg-opacity-80
+                  hover:bg-opacity-100
+                  active:bg-primary-variant
+                  absolute
+                  bottom-6
+                  right-3
+                "
+                @click="propsPanelOn = !propsPanelOn"
+              >
+                <span
+                  class="mdi mdi-clipboard-edit text-2xl text-on-primary"
+                ></span>
+              </button>
+            </div>
+            <app-slide-in-panel
+              visible-width-class="w-40"
+              v-model="propsPanelOn"
+            >
+              <the-props-panel></the-props-panel>
+            </app-slide-in-panel>
+          </div>
         </pane>
       </splitpanes>
     </main>
@@ -28,6 +56,7 @@ import { computed, defineComponent, readonly, ref, watchEffect } from "vue";
 import "splitpanes/dist/splitpanes.css";
 import GanttStage from "./components/GanttStage.vue";
 import TheHeaderBar from "./components/TheHeaderBar.vue";
+import ThePropsPanel from "./components/ThePropsPanel.vue";
 import TheTaskTable from "./components/TheTaskTable.vue";
 import { provideAppStyle, provideDark } from "./gantt-style";
 import { useStore } from "./store";
@@ -44,7 +73,14 @@ function prefersDarkColorScheme() {
 export default defineComponent({
   name: "App",
 
-  components: { Pane, Splitpanes, GanttStage, TheHeaderBar, TheTaskTable },
+  components: {
+    Pane,
+    Splitpanes,
+    GanttStage,
+    TheHeaderBar,
+    ThePropsPanel,
+    TheTaskTable,
+  },
 
   setup() {
     const store = useStore();
@@ -80,8 +116,11 @@ export default defineComponent({
 
     const panePos = computed(() => store.state.panePos);
 
+    const propsPanelOn = ref(false);
+
     return {
       panePos,
+      propsPanelOn,
     };
   },
 });
