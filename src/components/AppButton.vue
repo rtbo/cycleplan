@@ -1,0 +1,14 @@
+<template>
+  <button
+    class="
+      rounded-md
+      px-2
+      font-bold
+      opacity-80
+      hover:opacity-100
+      disabled:opacity-50
+      transition
+      duration-200
+    "
+  ></button>
+</template>

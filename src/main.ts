@@ -2,6 +2,7 @@ import { createApp } from "vue";
 import "@mdi/font/css/materialdesignicons.css";
 import App from "./App.vue";
 import "./index.css";
+import AppButton from "./components/AppButton.vue";
 import AppClickToEdit from "./components/AppClickToEdit.vue";
 import AppDivider from "./components/AppDivider.vue";
 import AppIconButton from "./components/AppIconButton.vue";
@@ -17,6 +18,7 @@ app.directive("focus", {
 });
 
 const appComps = {
+  AppButton,
   AppClickToEdit,
   AppDivider,
   AppIconButton,

@@ -4,24 +4,11 @@
       <thead>
         <tr class="border-b border-opacity-75 dark:border-opacity-50 h-12">
           <th v-if="deleteMode" class="px-1 text-center">
-            <button
+            <app-button
               :disabled="selectedTasks.length === 0"
-              class="
-                rounded-md
-                px-2
-                font-bold
-                bg-red-600
-                dark:bg-red-400
-                text-on-error
-                opacity-80
-                hover:opacity-100
-                disabled:opacity-50
-                transition
-                duration-200
-                mdi mdi-trash-can
-              "
+              class="bg-red-600 dark:bg-red-400 text-on-error mdi mdi-trash-can"
               @click="deleteSelected"
-            ></button>
+            ></app-button>
           </th>
           <th scope="col" class="text-left">Name</th>
           <th
