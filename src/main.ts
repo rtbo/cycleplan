@@ -6,6 +6,7 @@ import AppButton from "./components/AppButton.vue";
 import AppClickToEdit from "./components/AppClickToEdit.vue";
 import AppDivider from "./components/AppDivider.vue";
 import AppIconButton from "./components/AppIconButton.vue";
+import AppSlideInPanel from "./components/AppSlideInPanel.vue";
 import AppToggleButton from "./components/AppToggleButton.vue";
 import { key, store } from "./store";
 
@@ -22,6 +23,7 @@ const appComps = {
   AppClickToEdit,
   AppDivider,
   AppIconButton,
+  AppSlideInPanel,
   AppToggleButton,
 };
 Object.entries(appComps).forEach(([name, comp]) => {
