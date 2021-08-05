@@ -60,7 +60,12 @@ export default defineComponent({
 
     const taskDeleteMode = computed({
       get: () => store.state.editMode === "task-delete",
-      set: (v) => store.commit("edit-mode", v ? "task-delete" : undefined),
+      set: (v) => {
+        if (v) {
+          store.commit("selected-tasks", []);
+        }
+        store.commit("edit-mode", v ? "task-delete" : undefined);
+      },
     });
 
     const dark = useDark();

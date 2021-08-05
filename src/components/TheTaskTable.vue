@@ -197,6 +197,13 @@ export default defineComponent({
 
     const tasks = computed(() => store.state.tasks);
 
+    const selectedTasks = computed({
+      get: () => store.getters.selectedTasks,
+      set(value: number[]) {
+        store.commit("selected-tasks", value);
+      },
+    });
+
     const insertSlot: Ref<undefined | number> = ref(undefined);
 
     const rows: ComputedRef<Row[]> = computed(() => {
@@ -274,14 +281,10 @@ export default defineComponent({
       });
     };
 
-    const selectedTasks = computed({
-      get: () => store.getters.selectedTasks,
-      set(value: number[]) {
-        store.commit("selected-tasks", value);
-      },
-    });
     const deleteSelected = () => {
       store.commit("delete-tasks", selectedTasks.value);
+      store.commit("edit-mode", undefined);
+      nextTick(updateVerticalGeometry);
     };
 
     onMounted(updateVerticalGeometry);
@@ -289,6 +292,8 @@ export default defineComponent({
     return {
       headers,
       rows,
+
+      selectedTasks,
 
       editMode,
 
@@ -305,7 +310,6 @@ export default defineComponent({
       updateTaskPlan,
 
       deleteMode,
-      selectedTasks,
       deleteSelected,
     };
   },
