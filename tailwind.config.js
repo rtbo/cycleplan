@@ -1,14 +1,12 @@
-
 function colorVarRGB(colorVariable) {
-  return ({opacityVariable, opacityValue}) => {
+  return ({ opacityVariable, opacityValue }) => {
     if (opacityValue !== undefined) {
       return `rgba(var(${colorVariable}), ${opacityValue})`;
-    }
-    else if (opacityVariable !== undefined) {
+    } else if (opacityVariable !== undefined) {
       return `rgba(var(${colorVariable}), var(${opacityVariable}, 1))`;
     }
     return `rgb(var(${colorVariable}))`;
-  }
+  };
 }
 
 module.exports = {
@@ -32,7 +30,10 @@ module.exports = {
         "on-error": colorVarRGB("--color-on-error"),
       },
       contrast: {
-        25: '25%',
+        25: "25%",
+      },
+      transitionProperty: {
+        "width": "width",
       },
     },
   },
