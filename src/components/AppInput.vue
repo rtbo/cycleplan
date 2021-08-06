@@ -9,6 +9,7 @@
       rounded-sm
       text-on-surface text-opacity-80
       placeholder-on-surface placeholder-opacity-20
+      hover:ring-opacity-30
       focus:bg-opacity-10 focus:ring-opacity-50 focus:ring-2
     "
   />
