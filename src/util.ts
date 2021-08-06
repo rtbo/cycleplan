@@ -3,7 +3,7 @@ export function isPositiveInt(val: string): boolean {
 }
 
 export function isPositiveNumber(val: string): boolean {
-  return /^\d+([.,]\d+)?$/.test(val);
+  return /^\d+([.,]\d*)?$/.test(val);
 }
 
 export function ensureArray<T>(value: T | T[]): T[] {
