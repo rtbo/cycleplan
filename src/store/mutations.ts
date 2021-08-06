@@ -34,6 +34,13 @@ export function makeNewTask(input: NewTaskInput): TaskState {
   };
 }
 
+type LinkInput = {
+  from: number;
+  to: number;
+  fromStart?: boolean;
+  lag?: number;
+};
+
 export const mutations = {
   "edit-mode": (state: State, value: EditMode): void => {
     state.editMode = value;
@@ -148,30 +155,61 @@ export const mutations = {
 
   "update-link": (
     state: State,
-    {
-      from,
-      to,
-      fromStart,
-      lag,
-    }: { from: number; to: number; fromStart?: boolean; lag?: number }
+    { from, to, fromStart, lag }: LinkInput
   ): void => {
-    console.log("update-link", { from, to, fromStart, lag });
     const ind = state.links.findIndex((l) => l.from === from && l.to === to);
     if (ind >= 0) {
-      console.log("update-link", ind);
       const link = state.links[ind];
       const assign: { fromStart?: boolean; lag?: number } = {};
       if (fromStart !== undefined) assign.fromStart = fromStart;
       if (lag !== undefined) assign.lag = lag;
-      console.log("update-link", assign);
-      console.log(state.links);
       state.links[ind] = {
         ...link,
         ...assign,
       };
-      console.log(state.links);
       planStateCycle(state);
     }
+  },
+
+  "update-link-from": (
+    state: State,
+    { from, to, newFrom }: { from: number; to: number; newFrom: number }
+  ): void => {
+    const ind = state.links.findIndex((l) => l.from === from && l.to === to);
+    if (ind >= 0) {
+      const check = state.links.findIndex(
+        (l) => l.from === newFrom && l.to === to
+      );
+      if (check >= 0) {
+        throw new Error("cannot create two links between two same tasks");
+      }
+
+      const link = state.links[ind];
+      state.links[ind] = {
+        ...link,
+        from: newFrom,
+      };
+
+      planStateCycle(state);
+    }
+  },
+
+  "create-link": (
+    state: State,
+    { from, to, fromStart, lag }: LinkInput
+  ): void => {
+    const check = state.links.findIndex((l) => l.from === from && l.to === to);
+    if (check >= 0) {
+      throw new Error("cannot create two links between two same tasks");
+    }
+    state.links.push({
+      from,
+      to,
+      fromStart: fromStart ?? false,
+      lag: lag ?? 0,
+    });
+
+    planStateCycle(state);
   },
 
   "delete-link": (
