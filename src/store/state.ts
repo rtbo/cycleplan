@@ -16,6 +16,7 @@ export interface TaskState {
   id: number;
   selected: boolean;
   name: string;
+  notStartBefore: number;
   duration: number;
   earlyStart: number;
   earlyFinish: number;

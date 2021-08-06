@@ -4,7 +4,9 @@ import { State } from "./state";
 
 export function planStateCycle(state: State): void {
   const stateTasks = state.tasks;
-  const tasks = stateTasks.map((t) => new AtomTask(t.duration));
+  const tasks = stateTasks.map(
+    (t) => new AtomTask(t.duration, t.notStartBefore)
+  );
   const mapTask = (id: number) => {
     const ind = stateTasks.findIndex((t) => t.id === id);
     if (ind === -1) {

@@ -65,6 +65,8 @@ export abstract class Task implements Planner {
   readonly startOut = new OutDock(this);
   readonly finishOut = new OutDock(this);
 
+  public constructor(public readonly notStartBefore: number) {}
+
   /** index of the task within the cycle */
   ind = 0;
 
@@ -98,14 +100,18 @@ export abstract class Task implements Planner {
 }
 
 export class AtomTask extends Task {
-  constructor(public duration: number) {
-    super();
+  constructor(public duration: number, notStartBefore = 0) {
+    super(notStartBefore);
   }
 
   forwardPlan(ctx: PlanContext, earlyStart: number): number {
     const plan = ctx.lookUp(this);
 
-    plan.earlyStart = Math.max(earlyStart, plan.earlyStart);
+    plan.earlyStart = Math.max(
+      earlyStart,
+      plan.earlyStart,
+      this.notStartBefore
+    );
     plan.earlyFinish = plan.earlyStart + this.duration;
 
     let res = plan.earlyFinish;

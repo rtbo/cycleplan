@@ -28,6 +28,7 @@ export function makeNewTask(input: NewTaskInput): TaskState {
     id: newId(),
     selected: false,
     name,
+    notStartBefore: 0,
     earlyStart: 0,
     earlyFinish: duration,
     lateStart: 0,
