@@ -48,3 +48,13 @@
     --color-gantt-link--slack: 200, 150, 255;
   }
 }
+
+@layer utilities {
+  .add-colon::after {
+    content: ":";
+  }
+  .move-left-1 {
+    position: relative;
+    left: -0.25rem;
+  }
+}
