@@ -9,16 +9,6 @@ import {
   DarkMode,
 } from "./state";
 
-export type MutationTypes =
-  | "edit-mode"
-  | "dark-mode"
-  | "vertical-bounds"
-  | "cycle-name"
-  | "insert-task"
-  | "append-task"
-  | "update-task"
-  | "update-task-plan";
-
 type NewTaskInput = { name?: string; duration?: number };
 
 export function makeNewTask(input: NewTaskInput): TaskState {
