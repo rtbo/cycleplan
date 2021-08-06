@@ -33,5 +33,6 @@ export function planStateCycle(state: State): void {
     stateTasks[index].isCriticalPath = tp.isCriticalPath;
   });
   state.cycleTime = plan.cycleTime;
-  state.tasks = stateTasks;
+  //state.tasks = stateTasks;
+  state.cycleGraph = cycle;
 }

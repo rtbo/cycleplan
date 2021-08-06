@@ -1,4 +1,4 @@
-import { CycleTimeMode } from "@/model/cycle";
+import { Cycle, CycleTimeMode } from "@/model/cycle";
 import { planStateCycle } from "./algo";
 import { makeNewTask } from "./mutations";
 
@@ -59,6 +59,8 @@ export interface State {
   links: LinkState[];
   cycleTimeInput: CycleTimeInput;
   cycleTime: number;
+
+  cycleGraph: Cycle; // the graph representation is readonly from the app
 
   currentTaskId: number | undefined;
   darkMode: DarkMode;
@@ -122,6 +124,8 @@ export function createState(): State {
       loopOut: tasks[2].id,
     },
     cycleTime: 13,
+
+    cycleGraph: new Cycle([]), // will be replaced in planStateCycle
 
     currentTaskId: tasks[0].id,
     darkMode: (localStorage.getItem("dark-mode") as DarkMode) || "media",
