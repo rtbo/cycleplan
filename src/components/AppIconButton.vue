@@ -39,7 +39,7 @@ export default defineComponent({
           return cc.every((cc) => cc.includes("text-opacity"));
         }
       },
-      default: ["text-opacity-70", "hover:text-opacity-100"],
+      default: ["text-opacity-60", "hover:text-opacity-100"],
     },
     disabled: Boolean,
   },
