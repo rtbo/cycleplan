@@ -2,8 +2,16 @@ export function isPositiveInt(val: string): boolean {
   return /^\d+$/.test(val);
 }
 
+export function isInt(val: string): boolean {
+  return /^-?\d+$/.test(val);
+}
+
 export function isPositiveNumber(val: string): boolean {
   return /^\d+([.,]\d*)?$/.test(val);
+}
+
+export function isNumber(val: string): boolean {
+  return /^-?\d+([.,]\d*)?$/.test(val);
 }
 
 export function ensureArray<T>(value: T | T[]): T[] {
