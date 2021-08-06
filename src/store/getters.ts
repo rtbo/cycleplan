@@ -40,6 +40,11 @@ export const getters = {
     (taskId: number | undefined): LinkState[] =>
       taskId ? state.links.filter((l) => l.to === taskId) : [],
 
+  linkExists:
+    (state: State) =>
+    (fromId: number, toId: number): boolean =>
+      state.links.find((l) => l.from === fromId && l.to === toId) !== undefined,
+
   vbounds: (state: State): VerticalBounds => {
     const header = state.headerVBounds;
     if (!state.tasks.length) return header;
