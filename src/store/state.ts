@@ -123,7 +123,7 @@ export function createState(): State {
     },
     cycleTime: 13,
 
-    currentTaskId: undefined,
+    currentTaskId: tasks[0].id,
     darkMode: (localStorage.getItem("dark-mode") as DarkMode) || "media",
     panePos: 33,
     editMode: undefined,

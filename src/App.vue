@@ -116,7 +116,7 @@ export default defineComponent({
 
     const panePos = computed(() => store.state.panePos);
 
-    const propsPanelOn = ref(false);
+    const propsPanelOn = ref(true);
 
     return {
       panePos,
