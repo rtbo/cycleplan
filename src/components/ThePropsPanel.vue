@@ -4,38 +4,25 @@
     <span v-if="!task" class="italic">No task selected</span>
     <div v-else>
       <div class="props-panel__form">
-        <label for="props-panel__name" class="props-panel__label"> Name </label>
-        <app-input
-          id="props-panel__name"
-          class="props-panel__field font-semibold"
-          v-model="name"
-        />
-        <label for="props-panel__duration" class="props-panel__label">
-          Duration
-        </label>
+        <span class="props-panel__label"> Name </span>
+        <app-input class="props-panel__field font-semibold" v-model="name" />
+        <span class="props-panel__label"> Duration </span>
         <app-click-to-edit
-          id="props-panel__duration"
           class="props-panel__field font-semibold"
           input-class="font-semibold"
           v-model="duration"
           :validate="isPositiveNumber"
         />
-        <label for="props-panel__start" class="props-panel__label">
-          Start
-        </label>
-        <span id="props-panel__start" class="props-panel__field">
+        <span class="props-panel__label"> Start </span>
+        <span class="props-panel__field">
           {{ task.earlyStart }}
         </span>
-        <label for="props-panel__finish" class="props-panel__label">
-          Finish
-        </label>
-        <span id="props-panel__start" class="props-panel__field">
+        <span class="props-panel__label"> Finish </span>
+        <span class="props-panel__field">
           {{ task.earlyFinish }}
         </span>
-        <label for="props-panel__slack" class="props-panel__label">
-          Slack
-        </label>
-        <span id="props-panel__slack" class="props-panel__field">
+        <span class="props-panel__label"> Slack </span>
+        <span class="props-panel__field">
           {{ task.slack }}
         </span>
       </div>
@@ -43,17 +30,14 @@
       <h2 class="props-panel__title">Starting conditions</h2>
       <div class="px-1">
         <div class="props-panel__form">
-          <label for="props-panel__not-before" class="props-panel__label">
-            Not before
-          </label>
+          <span class="props-panel__label"> Not before </span>
           <app-click-to-edit
-            id="props-panel__not-before"
             class="props-panel__field font-bold"
             v-model="notBefore"
           />
         </div>
         <app-divider class="my-2" />
-        <div v-for="(cond, index) in startingConds" :key="index">
+        <div v-for="cond in startingConds" :key="`${cond.from}-${cond.to}`">
           <div class="grid grid-cols-12 gap-x-1 gap-y-2">
             <select
               class="
@@ -67,15 +51,16 @@
               :value="cond.mode"
               @change="setLinkMode(cond, $event.target.value)"
             >
-              <option value="with" class="add-colon">With</option>
-              <option value="after" class="add-colon">After</option>
+              <option value="with">With</option>
+              <option value="after">After</option>
             </select>
             <select
               class="col-span-8 font-semibold bg-transparent"
               :value="cond.taskFromId"
+              @change="setLinkFrom(cond, $event.target.value)"
             >
               <option
-                v-for="task in possibleTaskFrom(cond.taskFromId)"
+                v-for="task in cond.possibleTaskFrom"
                 :key="task.id"
                 :value="task.id"
               >
@@ -87,7 +72,7 @@
               class="col-span-6 font-semibold"
               input-class="font-semibold"
               :model-value="cond.lag"
-              @update:model-value="setLinkLag(cond, value)"
+              @update:model-value="setLinkLag(cond, $event)"
               :validate="isNumber"
             />
             <app-button
@@ -103,12 +88,52 @@
           </div>
           <app-divider class="my-2" />
         </div>
-        <div class="flex flex-row">
-          <div class="flex-grow"></div>
-          <app-icon-button
-            class="mx-2 text-xl"
-            icon="mdi-plus"
-          ></app-icon-button>
+        <div>
+          <div class="flex flex-row">
+            <span class="flex-grow"> Add new </span>
+            <app-icon-button
+              class="mx-2 text-xl"
+              icon="mdi-plus"
+              :disabled="!newLinkFrom"
+              @click="createNewLink"
+            ></app-icon-button>
+          </div>
+          <div class="grid grid-cols-12 gap-x-1 gap-y-2">
+            <select
+              class="
+                col-span-4
+                text-sm
+                underline
+                bg-transparent
+                cursor-pointer
+                move-left-1
+                text-gray-500
+              "
+              v-model="newLinkMode"
+            >
+              <option value="with">With</option>
+              <option value="after">After</option>
+            </select>
+            <select
+              class="col-span-8 font-semibold bg-transparent text-gray-500"
+              v-model="newLinkFrom"
+            >
+              <option value="">
+                {{
+                  possibleNewLinkFrom.length
+                    ? "(select previous)"
+                    : "(none available)"
+                }}
+              </option>
+              <option
+                v-for="task in possibleNewLinkFrom"
+                :key="task.id"
+                :value="task.id"
+              >
+                {{ task.name }}
+              </option>
+            </select>
+          </div>
         </div>
       </div>
     </div>
@@ -116,8 +141,10 @@
 </template>
 
 <script lang="ts">
-import { computed, ComputedRef, defineComponent } from "vue";
+import { computed, ComputedRef, defineComponent, Ref, ref } from "vue";
+import { Task } from "@/model/cycle";
 import { useStore } from "@/store";
+import { TaskState } from "@/store/state";
 import { isPositiveNumber, isNumber } from "@/util";
 
 interface StartingCond {
@@ -125,6 +152,15 @@ interface StartingCond {
   taskFromId: number;
   taskFrom: string;
   lag: number;
+  possibleTaskFrom: TaskState[];
+}
+
+function canFindAncestorTask(task: Task, indToBeFound: number): boolean {
+  if (task.ind === indToBeFound) return true;
+  for (const l of task.startIn.links) {
+    if (canFindAncestorTask(l.from.task, indToBeFound)) return true;
+  }
+  return false;
 }
 
 export default defineComponent({
@@ -132,6 +168,9 @@ export default defineComponent({
     const store = useStore();
 
     const task = computed(() => store.getters.currentTask);
+    const taskInd = computed(() =>
+      store.state.tasks.findIndex((t) => t.id === task.value?.id)
+    );
 
     const name = computed({
       get: () => task.value?.name,
@@ -163,31 +202,32 @@ export default defineComponent({
       },
     });
 
+    const possibleTaskFrom = (currTaskFrom: number | undefined) => {
+      if (!task.value) return [];
+      const taskId = task.value.id;
+
+      return store.state.tasks.filter((t, index) => {
+        if (t.id === taskId) return false;
+        if (t.id === currTaskFrom) return true;
+        if (store.getters.linkExists(t.id, taskId)) return false;
+
+        const task = store.state.cycleGraph.tasks[index];
+        return !canFindAncestorTask(task, taskInd.value);
+      });
+    };
+
     const startingConds: ComputedRef<StartingCond[]> = computed(() =>
       store.getters.linksToTask(store.state.currentTaskId).map((l) => ({
         mode: l.fromStart ? "with" : "after",
         taskFromId: l.from,
         taskFrom: store.getters.taskForId(l.from)?.name || "",
         lag: l.lag,
+        possibleTaskFrom: possibleTaskFrom(l.from),
       }))
     );
 
-    const taskFromIds = computed(() =>
-      startingConds.value.map((sc) => sc.taskFromId)
-    );
-
-    const possibleTaskFrom = (currTaskFrom: number | undefined) => {
-      if (!task.value) return [];
-      return store.state.tasks.filter(
-        (t) =>
-          (t.id === currTaskFrom || !taskFromIds.value.includes(t.id)) &&
-          t.id !== task.value?.id
-      );
-    };
-
     const setLinkMode = (cond: StartingCond, mode: "with" | "after") => {
       if (!task.value) return;
-
       store.commit("update-link", {
         from: cond.taskFromId,
         to: task.value.id,
@@ -195,9 +235,17 @@ export default defineComponent({
       });
     };
 
+    const setLinkFrom = (cond: StartingCond, taskFrom: number) => {
+      if (!task.value) return;
+      store.commit("update-link-from", {
+        from: cond.taskFromId,
+        to: task.value.id,
+        newFrom: taskFrom,
+      });
+    };
+
     const setLinkLag = (cond: StartingCond, lag: string) => {
       if (!task.value) return;
-
       const lagVal = parseFloat(lag.replace(",", "."));
       if (!isNaN(lagVal)) {
         store.commit("update-link", {
@@ -213,16 +261,38 @@ export default defineComponent({
         store.commit("delete-link", { from: taskFromId, to: task.value.id });
     };
 
+    const newLinkMode: Ref<"with" | "after"> = ref("after");
+
+    const newLinkFrom: Ref<number | ""> = ref("");
+
+    const possibleNewLinkFrom = computed(() => possibleTaskFrom(undefined));
+
+    const createNewLink = () => {
+      if (!task.value) return;
+      if (!newLinkFrom.value) return;
+      const newLink = {
+        from: newLinkFrom.value,
+        to: task.value.id,
+        fromStart: newLinkMode.value === "with",
+        lag: 0,
+      };
+      store.commit("create-link", newLink);
+    };
+
     return {
       task,
       name,
       notBefore,
       duration,
       startingConds,
-      possibleTaskFrom,
       setLinkMode,
+      setLinkFrom,
       setLinkLag,
       deleteStartingCond,
+      newLinkMode,
+      newLinkFrom,
+      possibleNewLinkFrom,
+      createNewLink,
       isPositiveNumber,
       isNumber,
     };
