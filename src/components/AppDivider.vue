@@ -1,7 +1,8 @@
 <template>
   <hr
+    class="border-on-background"
     :class="classes"
-    class="light:border-opacity-25 dark:border-opacity-25"
+    :style="style"
     role="separator"
   />
 </template>
@@ -15,6 +16,10 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
+    opacity: {
+      type: Number,
+      default: 10,
+    },
   },
   setup(props) {
     const horizontalClasses = ["border-t", "w-full", "h-0"];
@@ -23,6 +28,9 @@ export default defineComponent({
       classes: computed(() =>
         props.vertical ? verticalClasses : horizontalClasses
       ),
+      style: computed(() => ({
+        "--tw-border-opacity": `${props.opacity * 0.01}`,
+      })),
     };
   },
 });
