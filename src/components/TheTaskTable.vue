@@ -78,17 +78,8 @@
         >
           <td v-if="deleteMode"></td>
           <td>
-            <input
+            <app-input
               placeholder="Append Task here"
-              class="
-                bg-on-surface bg-opacity-5
-                outline-none
-                ring-1 ring-on-surface ring-opacity-20
-                rounded-sm
-                text-on-surface text-opacity-80
-                placeholder-on-surface placeholder-opacity-20
-                focus:bg-opacity-10 focus:ring-opacity-50 focus:ring-2
-              "
               v-model="appendTaskName"
               @keydown.esc="appendTaskCancel"
               @keyup.enter="appendTask"

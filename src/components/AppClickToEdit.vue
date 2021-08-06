@@ -10,9 +10,14 @@
     {{ modelValue }}
     <app-icon-button v-show="showPencil" icon="mdi-pencil"></app-icon-button>
   </span>
-  <span v-else @mouseover="showPencil = true" @mouseleave="showPencil = false">
-    <input
-      class="bg-transparent border-2 border-gray-400 rounded-md outline-none"
+  <span
+    v-else
+    @mouseover="showPencil = true"
+    @mouseleave="showPencil = false"
+    class="flex flex-row flex-nowrap"
+  >
+    <app-input
+      class="flex-shrink w-full"
       :class="computedInputClass"
       v-model="editValue"
       type="text"
@@ -61,20 +66,17 @@ export default defineComponent({
     });
 
     const startEditing = () => {
-      console.log("start editing");
       editValue.value = props.modelValue || "";
       editing.value = true;
     };
 
     const applyEdit = () => {
-      console.log("apply edit");
       if (!valid.value) return;
       emit("update:modelValue", editValue.value);
       editing.value = false;
     };
 
     const cancelEdit = () => {
-      console.log("cancel edit");
       nextTick(() => {
         console.log("cancel edit next tick");
         editing.value = false;
