@@ -56,7 +56,8 @@ export default defineComponent({
       const oc = props.disabled
         ? ["text-opacity-30"]
         : ensureArray(props.opacityClass);
-      return [...cc, ...oc];
+      const cursor = props.disabled ? "cursor-default" : "cursor-pointer";
+      return [...cc, ...oc, cursor];
     });
 
     return {
