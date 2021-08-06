@@ -4,7 +4,7 @@ import { makeNewTask } from "./mutations";
 
 let currentId = 0;
 export function newId(): number {
-  return currentId++;
+  return ++currentId;
 }
 
 export interface VerticalBounds {
