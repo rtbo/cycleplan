@@ -38,7 +38,7 @@
               </button>
             </div>
             <app-slide-in-panel
-              visible-width-class="w-40"
+              visible-width-class="w-72"
               v-model="propsPanelOn"
             >
               <the-props-panel></the-props-panel>

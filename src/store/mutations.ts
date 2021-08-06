@@ -155,6 +155,15 @@ export const mutations = {
 
     planStateCycle(state);
   },
+
+  "delete-link": (
+    state: State,
+    { from, to }: { from: number; to: number }
+  ): void => {
+    state.links = state.links.filter((l) => l.from !== from || l.to !== to);
+
+    planStateCycle(state);
+  },
 };
 
 export type Mutations = typeof mutations;

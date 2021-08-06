@@ -1,5 +1,5 @@
 import { CycleTime, CycleTimeMode } from "../model/cycle";
-import { State, TaskState, VerticalBounds } from "./state";
+import { LinkState, State, TaskState, VerticalBounds } from "./state";
 
 export function cycleTimeDef(state: State): CycleTime<number> {
   switch (state.cycleTimeInput.mode) {
@@ -34,6 +34,11 @@ export const getters = {
 
   selectedTasks: (state: State): number[] =>
     state.tasks.filter((t) => t.selected).map((t) => t.id),
+
+  linksToTask:
+    (state: State) =>
+    (taskId: number | undefined): LinkState[] =>
+      taskId ? state.links.filter((l) => l.to === taskId) : [],
 
   vbounds: (state: State): VerticalBounds => {
     const header = state.headerVBounds;
