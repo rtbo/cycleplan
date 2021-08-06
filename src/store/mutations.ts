@@ -156,6 +156,34 @@ export const mutations = {
     planStateCycle(state);
   },
 
+  "update-link": (
+    state: State,
+    {
+      from,
+      to,
+      fromStart,
+      lag,
+    }: { from: number; to: number; fromStart?: boolean; lag?: number }
+  ): void => {
+    console.log("update-link", { from, to, fromStart, lag });
+    const ind = state.links.findIndex((l) => l.from === from && l.to === to);
+    if (ind >= 0) {
+      console.log("update-link", ind);
+      const link = state.links[ind];
+      const assign: { fromStart?: boolean; lag?: number } = {};
+      if (fromStart !== undefined) assign.fromStart = fromStart;
+      if (lag !== undefined) assign.lag = lag;
+      console.log("update-link", assign);
+      console.log(state.links);
+      state.links[ind] = {
+        ...link,
+        ...assign,
+      };
+      console.log(state.links);
+      planStateCycle(state);
+    }
+  },
+
   "delete-link": (
     state: State,
     { from, to }: { from: number; to: number }
