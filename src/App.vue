@@ -10,19 +10,19 @@
       ></TheHeaderBar>
     </div>
     <main class="flex-grow">
-      <splitpanes>
-        <pane :size="panePos">
+      <app-resize-panel class="h-full" v-model="tableOn">
+        <template #panel>
           <the-task-table></the-task-table>
-        </pane>
-        <pane :size="100 - panePos">
-          <app-slide-over-panel v-model="propsPanelOn" class="h-full">
-            <gantt-stage></gantt-stage>
-            <template #panel>
-              <the-props-panel></the-props-panel>
-            </template>
-          </app-slide-over-panel>
-        </pane>
-      </splitpanes>
+        </template>
+
+        <app-slide-over-panel v-model="propsPanelOn" class="h-full">
+          <gantt-stage></gantt-stage>
+
+          <template #panel>
+            <the-props-panel></the-props-panel>
+          </template>
+        </app-slide-over-panel>
+      </app-resize-panel>
     </main>
   </div>
 </template>
@@ -91,12 +91,11 @@ export default defineComponent({
     provideDark(dark);
     provideAppStyle(dark);
 
-    const panePos = computed(() => store.state.panePos);
-
+    const tableOn = ref(true);
     const propsPanelOn = ref(true);
 
     return {
-      panePos,
+      tableOn,
       propsPanelOn,
     };
   },

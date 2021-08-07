@@ -7,6 +7,7 @@ import AppClickToEdit from "./components/AppClickToEdit.vue";
 import AppDivider from "./components/AppDivider.vue";
 import AppIconButton from "./components/AppIconButton.vue";
 import AppInput from "./components/AppInput.vue";
+import AppResizePanel from "./components/AppResizePanel.vue";
 import AppSlideOverPanel from "./components/AppSlideOverPanel.vue";
 import AppToggleButton from "./components/AppToggleButton.vue";
 import { key, store } from "./store";
@@ -25,6 +26,7 @@ const appComps = {
   AppDivider,
   AppIconButton,
   AppInput,
+  AppResizePanel,
   AppSlideOverPanel,
   AppToggleButton,
 };

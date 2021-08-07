@@ -65,7 +65,6 @@ export interface State {
   currentTaskId: number | undefined;
   darkMode: DarkMode;
   headerVBounds: VerticalBounds;
-  panePos: number;
   editMode: EditMode;
 
   timeScale: number;
@@ -129,7 +128,6 @@ export function createState(): State {
 
     currentTaskId: tasks[0].id,
     darkMode: (localStorage.getItem("dark-mode") as DarkMode) || "media",
-    panePos: 33,
     editMode: undefined,
     headerVBounds: {
       top: 0,

@@ -3,13 +3,14 @@
     <div class="absolute w-full h-full">
       <slot></slot>
     </div>
+
     <div
       class="absolute h-full flex flex-row transition-all duration-200"
       :style="panelWrapStyle"
       ref="panelWrapEl"
     >
       <div class="border-l border-on-surface border-opacity-50 w-0 relative">
-        <div class="absolute left-1/2 top-1/2">
+        <div class="absolute h-full left-1/2 top-full">
           <button
             class="
               rounded-full
@@ -20,7 +21,8 @@
               active:bg-primary-variant
               relative
               -left-1/2
-              -top-1/2
+              -top-24
+              z-10
             "
             @click="toggleVisible"
           >
@@ -30,6 +32,7 @@
           </button>
         </div>
       </div>
+
       <div>
         <slot name="panel"></slot>
       </div>
