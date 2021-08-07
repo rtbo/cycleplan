@@ -28,13 +28,13 @@ module.exports = {
     },
     extend: {
       colors: {
-        "primary": colorVarRGB("--color-primary"),
+        primary: colorVarRGB("--color-primary"),
         "primary-variant": colorVarRGB("--color-primary-variant"),
-        "secondary": colorVarRGB("--color-secondary"),
+        secondary: colorVarRGB("--color-secondary"),
         "secondary-variant": colorVarRGB("--color-secondary-variant"),
-        "background": colorVarRGB("--color-background"),
-        "surface": colorVarRGB("--color-surface"),
-        "error": colorVarRGB("--color-error"),
+        background: colorVarRGB("--color-background"),
+        surface: colorVarRGB("--color-surface"),
+        error: colorVarRGB("--color-error"),
         "on-primary": colorVarRGB("--color-on-primary"),
         "on-secondary": colorVarRGB("--color-on-secondary"),
         "on-background": colorVarRGB("--color-on-background"),
@@ -45,7 +45,7 @@ module.exports = {
         25: "25%",
       },
       transitionProperty: {
-        "width": "width",
+        width: "width",
       },
     },
   },
