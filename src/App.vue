@@ -28,9 +28,7 @@
 </template>
 
 <script lang="ts">
-import { Splitpanes, Pane } from "splitpanes";
 import { computed, defineComponent, readonly, ref, watchEffect } from "vue";
-import "splitpanes/dist/splitpanes.css";
 import GanttStage from "./components/GanttStage.vue";
 import TheHeaderBar from "./components/TheHeaderBar.vue";
 import ThePropsPanel from "./components/ThePropsPanel.vue";
@@ -51,8 +49,6 @@ export default defineComponent({
   name: "App",
 
   components: {
-    Pane,
-    Splitpanes,
     GanttStage,
     TheHeaderBar,
     ThePropsPanel,

@@ -21,7 +21,6 @@
     "@mdi/font": "^5.9.55",
     "core-js": "^3.6.5",
     "register-service-worker": "^1.7.1",
-    "splitpanes": "^3.0.6",
     "vue": "^3.0.5",
     "vuex": "^4.0.2"
   },
