@@ -15,35 +15,12 @@
           <the-task-table></the-task-table>
         </pane>
         <pane :size="100 - panePos">
-          <div class="flex flex-row h-full flex-nowrap">
-            <div class="relative h-full flex-grow overflow-hidden">
-              <gantt-stage></gantt-stage>
-              <button
-                class="
-                  rounded-full
-                  w-10
-                  h-10
-                  bg-primary bg-opacity-80
-                  hover:bg-opacity-100
-                  active:bg-primary-variant
-                  absolute
-                  bottom-6
-                  right-3
-                "
-                @click="propsPanelOn = !propsPanelOn"
-              >
-                <span
-                  class="mdi mdi-clipboard-edit text-2xl text-on-primary"
-                ></span>
-              </button>
-            </div>
-            <app-slide-in-panel
-              visible-width-class="w-72"
-              v-model="propsPanelOn"
-            >
+          <app-slide-over-panel v-model="propsPanelOn" class="h-full">
+            <gantt-stage></gantt-stage>
+            <template #panel>
               <the-props-panel></the-props-panel>
-            </app-slide-in-panel>
-          </div>
+            </template>
+          </app-slide-over-panel>
         </pane>
       </splitpanes>
     </main>
