@@ -1,5 +1,5 @@
 import { createApp } from "vue";
-import "@mdi/font/css/materialdesignicons.css";
+import "@iconify/iconify";
 import App from "./App.vue";
 import "./index.css";
 import AppButton from "./components/AppButton.vue";

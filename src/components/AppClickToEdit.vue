@@ -8,7 +8,7 @@
     @click="startEditing"
   >
     {{ modelValue }}
-    <app-icon-button v-show="showPencil" icon="mdi-pencil"></app-icon-button>
+    <app-icon-button v-show="showPencil" icon="mdi:pencil"></app-icon-button>
   </span>
   <span
     v-else
@@ -28,9 +28,9 @@
     <app-icon-button
       @click="applyEdit"
       :disabled="!valid"
-      icon="mdi-keyboard-return"
+      icon="mdi:keyboard-return"
     />
-    <app-icon-button @click="cancelEdit" icon="mdi-keyboard-esc" />
+    <app-icon-button @click="cancelEdit" icon="mdi:keyboard-esc" />
   </span>
 </template>
 
