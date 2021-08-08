@@ -10,5 +10,7 @@
       transition
       duration-200
     "
-  ></button>
+  >
+    <slot></slot>
+  </button>
 </template>

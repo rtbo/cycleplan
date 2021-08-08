@@ -4,7 +4,7 @@
     class="transition duration-300"
     :disabled="disabled"
   >
-    <span class="mdi" :class="icon"></span>
+    <span class="iconify" :data-icon="icon"></span>
   </button>
 </template>
 
@@ -17,7 +17,6 @@ export default defineComponent({
     icon: {
       type: String,
       required: true,
-      validator: (icon: string) => icon.startsWith("mdi-"),
     },
     colorClass: {
       type: [String, Array],

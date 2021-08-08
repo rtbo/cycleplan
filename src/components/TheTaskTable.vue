@@ -6,9 +6,11 @@
           <th v-if="deleteMode" class="px-1 text-center">
             <app-button
               :disabled="selectedTasks.length === 0"
-              class="bg-red-600 dark:bg-red-400 text-on-error mdi mdi-trash-can"
+              class="bg-red-600 p-1 dark:bg-red-400 text-center text-on-error"
               @click="deleteSelected"
-            ></app-button>
+            >
+              <span class="iconify" data-icon="mdi:trash-can"></span>
+            </app-button>
           </th>
           <th scope="col" class="text-left">Name</th>
           <th
@@ -88,12 +90,12 @@
             <app-icon-button
               v-show="!!appendTaskName"
               @click="appendTask"
-              icon="mdi-keyboard-return"
+              icon="mdi:keyboard-return"
             />
             <app-icon-button
               v-show="!!appendTaskName"
               @click="appendTaskCancel"
-              icon="mdi-keyboard-esc"
+              icon="mdi:keyboard-esc"
             />
           </td>
           <td v-for="header in headers" :key="header.value"></td>

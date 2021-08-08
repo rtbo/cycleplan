@@ -78,13 +78,18 @@
             <app-button
               class="
                 col-span-2
+                text-center
                 bg-red-600
                 dark:bg-red-400
                 text-on-error
-                mdi mdi-trash-can
               "
               @click="deleteStartingCond(cond.taskFromId)"
-            ></app-button>
+            >
+              <span
+                class="text-center w-full iconify"
+                data-icon="mdi:trash-can"
+              ></span>
+            </app-button>
           </div>
           <app-divider class="my-2" />
         </div>
@@ -93,7 +98,7 @@
             <span class="flex-grow"> Add new </span>
             <app-icon-button
               class="mx-2 text-xl"
-              icon="mdi-plus"
+              icon="mdi:plus"
               :disabled="!newLinkFrom"
               @click="createNewLink"
             ></app-icon-button>

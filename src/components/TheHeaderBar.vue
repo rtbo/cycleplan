@@ -16,15 +16,16 @@
       </app-toggle-button>
       <app-toggle-button class="w-8 h-8" v-model="taskDeleteMode">
         <span
-          class="mdi mdi-trash-can text-xl text-red-600 dark:text-red-400"
+          class="text-xl text-red-600 dark:text-red-400 iconify"
+          data-icon="mdi:trash-can"
         ></span>
       </app-toggle-button>
     </div>
     <div class="flex-grow"></div>
     <app-icon-button
       @click="setDarkMode(dark ? 'light' : 'dark')"
-      :icon="dark ? 'mdi-brightness-5' : 'mdi-brightness-4'"
       class="text-lg"
+      :icon="dark ? 'mdi:brightness-5' : 'mdi:brightness-4'"
     />
   </header>
 </template>

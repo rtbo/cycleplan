@@ -19,6 +19,7 @@
               bg-primary bg-opacity-80
               hover:bg-opacity-100
               active:bg-primary-variant
+              text-center
               relative
               -left-1/2
               -top-24
@@ -27,7 +28,8 @@
             @click="toggleVisible"
           >
             <span
-              class="mdi mdi-unfold-more-vertical text-2xl text-on-primary"
+              class="inline-block text-3xl text-on-primary iconify"
+              data-icon="mdi:unfold-more-vertical"
             ></span>
           </button>
         </div>
