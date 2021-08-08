@@ -17,7 +17,6 @@
     "pre-commit": "eslint . --ext .js,.ts,.vue --max-warnings 0 && tsc --noemit"
   },
   "dependencies": {
-    "@fontsource/roboto": "^4.5.0",
     "@iconify/iconify": "^2.0.3",
     "core-js": "^3.6.5",
     "register-service-worker": "^1.7.1",
@@ -27,7 +26,6 @@
   "devDependencies": {
     "@types/chai": "^4.2.11",
     "@types/mocha": "^5.2.4",
-    "@types/splitpanes": "^2.2.1",
     "@typescript-eslint/eslint-plugin": "^4.18.0",
     "@typescript-eslint/parser": "^4.18.0",
     "@vitejs/plugin-vue": "^1.2.4",
