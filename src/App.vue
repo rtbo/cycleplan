@@ -1,13 +1,13 @@
 <template>
   <div class="flex flex-col h-screen">
     <div class="flex-grow-0">
-      <TheHeaderBar
+      <the-header-bar
         class="
           shadow-lg
           border-b border-on-background border-opacity-25
           dark:border-opacity-10
         "
-      ></TheHeaderBar>
+      ></the-header-bar>
     </div>
     <main class="flex-grow">
       <app-resize-panel class="h-full" v-model="tableOn">
