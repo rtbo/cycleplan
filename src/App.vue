@@ -97,11 +97,3 @@ export default defineComponent({
   },
 });
 </script>
-
-<style>
-.splitpanes--vertical > .splitpanes__splitter {
-  min-width: 6px;
-  background-color: rgba(128, 128, 128, 0.2);
-  position: relative;
-}
-</style>
