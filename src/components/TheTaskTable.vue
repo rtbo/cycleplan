@@ -6,7 +6,13 @@
           <th v-if="deleteMode" class="px-1 text-center">
             <app-button
               :disabled="selectedTasks.length === 0"
-              class="bg-red-600 p-1 dark:bg-red-400 text-center text-on-error"
+              class="
+                bg-red-600
+                p-1
+                dark:bg-red-400
+                text-center text-white
+                dark:text-black
+              "
               @click="deleteSelected"
             >
               <span class="iconify" data-icon="mdi:trash-can"></span>
@@ -68,7 +74,7 @@
           <td
             v-if="row.insert"
             :colspan="headers.length + 1"
-            class="bg-secondary cursor-pointer"
+            class="bg-pink-600 dark:bg-pink-400 cursor-pointer"
             @click="insertTask"
           ></td>
         </tr>
@@ -213,7 +219,7 @@ export default defineComponent({
       if (isInsertRow(row)) {
         return ["insert-row", "h-3"];
       } else {
-        const classes = ["task-row", "h-10", "bg-primary"];
+        const classes = ["task-row", "h-10", "bg-indigo-500"];
         if (store.state.currentTaskId === row.id) {
           classes.push("bg-opacity-20");
         } else {

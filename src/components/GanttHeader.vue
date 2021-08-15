@@ -5,15 +5,15 @@
       y="0"
       :width="stageWidth"
       :height="headerHeight"
-      class="gantt-header--bg"
+      class="gantt-header__rulerbg"
     />
     <g
       v-for="grad in grads"
       :key="grad.time"
       :transform="`translate(${grad.px} 0)`"
     >
-      <line x1="0" y1="0" x2="0" :y2="stageHeight" class="gantt-header--grad" />
-      <text x="5" :y="headerHeight - 5" class="gantt-header--text">
+      <line x1="0" y1="0" x2="0" :y2="stageHeight" class="gantt-header__grad" />
+      <text x="5" :y="headerHeight - 5" class="gantt-header__text">
         {{ grad.time }}
       </text>
     </g>
@@ -78,15 +78,15 @@ export default defineComponent({
 </script>
 
 <style lang="postcss">
-.gantt-header--bg {
-  fill: rgba(var(--color-gantt-ruler), 0.15);
+.gantt-header__rulerbg {
+  fill: var(--color-gantt-ruler);
 }
-.gantt-header--grad {
-  stroke: rgba(var(--color-gantt-grad), 0.5);
+.gantt-header__grad {
+  stroke: var(--color-gantt-grad);
   stroke-width: 0.5;
 }
-.gantt-header--text {
-  fill: rgba(var(--color-on-surface), 1);
+.gantt-header__text {
+  fill: var(--color-gantt-text);
   @apply text-sm;
 }
 </style>

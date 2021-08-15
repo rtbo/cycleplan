@@ -1,25 +1,19 @@
 <template>
   <div class="flex flex-col h-screen">
     <div class="flex-grow-0">
-      <the-header-bar
-        class="
-          shadow-lg
-          border-b border-on-background border-opacity-25
-          dark:border-opacity-10
-        "
-      ></the-header-bar>
+      <the-header-bar class="shadow-lg border-b border-gray-500" />
     </div>
     <main class="flex-grow">
       <app-resize-panel class="h-full" v-model="tableOn">
         <template #panel>
-          <the-task-table></the-task-table>
+          <the-task-table />
         </template>
 
         <app-slide-over-panel v-model="propsPanelOn" class="h-full">
-          <gantt-stage></gantt-stage>
+          <gantt-stage />
 
           <template #panel>
-            <the-props-panel></the-props-panel>
+            <the-props-panel />
           </template>
         </app-slide-over-panel>
       </app-resize-panel>

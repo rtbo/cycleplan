@@ -5,14 +5,14 @@
       :y1="cycleStartLine.y1"
       :x2="cycleStartLine.x2"
       :y2="cycleStartLine.y2"
-      class="gantt-cycletime--line"
+      class="gantt-cycletime__line"
     />
     <line
       :x1="cycleEndLine.x1"
       :y1="cycleEndLine.y1"
       :x2="cycleEndLine.x2"
       :y2="cycleEndLine.y2"
-      class="gantt-cycletime--line"
+      class="gantt-cycletime__line"
     />
   </g>
 </template>
@@ -67,8 +67,8 @@ export default defineComponent({
 </script>
 
 <style lang="postcss">
-.gantt-cycletime--line {
-  stroke: rgb(var(--color-gantt-cycle-line));
-  stroke-width: 0.5;
+.gantt-cycletime__line {
+  stroke: var(--color-gantt-cycle-line);
+  stroke-width: 1;
 }
 </style>

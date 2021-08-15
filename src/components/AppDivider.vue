@@ -1,6 +1,6 @@
 <template>
   <hr
-    class="border-on-background"
+    class="border-gray-500"
     :class="classes"
     :style="style"
     role="separator"

@@ -9,16 +9,14 @@
       :style="panelWrapStyle"
       ref="panelWrapEl"
     >
-      <div class="border-l border-on-surface border-opacity-50 w-0 relative">
+      <div class="border-l border-gray-500 w-0 relative">
         <div class="absolute h-full left-1/2 top-full">
           <button
             class="
               rounded-full
               w-10
               h-10
-              bg-primary bg-opacity-80
-              hover:bg-opacity-100
-              active:bg-primary-variant
+              bg-transparent
               text-center
               relative
               -left-1/2
@@ -28,7 +26,17 @@
             @click="toggleVisible"
           >
             <span
-              class="inline-block text-3xl text-on-primary iconify"
+              class="
+                inline-block
+                transition-all
+                duration-200
+                text-3xl text-gray-600
+                dark:text-gray-400
+                hover:text-gray-700
+                active:text-gray-900
+                dark:hover:text-gray-300 dark:active:text-gray-100
+                iconify
+              "
               data-icon="mdi:unfold-more-vertical"
             ></span>
           </button>

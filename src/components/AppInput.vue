@@ -3,14 +3,20 @@
     :value="modelValue"
     @input="$emit('update:modelValue', $event.target.value)"
     class="
-      bg-on-surface bg-opacity-5
+      bg-gray-100
+      dark:bg-gray-800
       outline-none
-      ring-1 ring-on-surface ring-opacity-20
+      ring-1 ring-gray-300
+      dark:ring-gray-600
       rounded-sm
-      text-on-surface text-opacity-80
-      placeholder-on-surface placeholder-opacity-20
-      hover:ring-opacity-40
-      focus:bg-opacity-10 focus:ring-opacity-50 focus:ring-2
+      text-gray-800
+      dark:text-gray-100
+      placeholder-gray-600
+      dark:placeholder-gray-400
+      hover:ring-indigo-500
+      focus:ring-indigo-700
+      dark:focus:ring-indigo-300
+      focus:ring-2
       transition-all
       duration-200
     "

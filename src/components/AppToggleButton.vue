@@ -1,22 +1,22 @@
 <template>
   <button
     class="
-      bg-on-background
-      border border-on-background
-      hover:bg-opacity-25
-      hover:border
-      hover:border-on-background
-      hover:border-opacity-20
       transition
       duration-200
       flex
       items-center
       justify-center
+      hover:bg-gray-300
+      dark:hover:bg-gray-700
+      border border-gray-500
     "
-    :class="opacityClass"
+    :class="butClass"
+    :disabled="disabled"
     @click="toggle"
   >
-    <slot></slot>
+    <span :class="spanClass">
+      <slot></slot>
+    </span>
   </button>
 </template>
 
@@ -26,19 +26,24 @@ import { computed, defineComponent } from "vue";
 export default defineComponent({
   props: {
     modelValue: Boolean,
+    disabled: Boolean,
   },
   emits: ["update:modelValue"],
   setup(props, { emit }) {
-    const opacityClass = computed(() =>
+    const butClass = computed(() =>
       props.modelValue
-        ? ["bg-opacity-10", "border-opacity-10"]
-        : ["bg-opacity-5", "border-opacity-0", "filter", "contrast-25"]
+        ? ["bg-gray-200", "dark:bg-gray-800", "border-opacity-100"]
+        : ["bg-gray-100", "dark:bg-gray-900", "border-opacity-0"]
+    );
+    const spanClass = computed(() =>
+      props.modelValue ? [] : ["filter", "contrast-25"]
     );
     const toggle = () => {
       emit("update:modelValue", !props.modelValue);
     };
     return {
-      opacityClass,
+      butClass,
+      spanClass,
       toggle,
     };
   },
