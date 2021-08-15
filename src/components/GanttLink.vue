@@ -151,17 +151,17 @@ export default defineComponent({
 <style lang="postcss">
 .gantt-link--main {
   fill: none;
-  stroke: rgb(var(--color-gantt-link));
+  stroke: var(--color-gantt-link);
   stroke-width: 1.5;
 }
 .gantt-link--slack {
   fill: none;
-  stroke: rgba(var(--color-gantt-link--slack), 0.4);
+  stroke: var(--color-gantt-link--slack);
   stroke-dasharray: 4;
   stroke-width: 1.5;
 }
 .gantt-link--arrow {
   stroke: none;
-  fill: rgb(var(--color-gantt-link));
+  fill: var(--color-gantt-link);
 }
 </style>

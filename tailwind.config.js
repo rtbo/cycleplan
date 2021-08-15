@@ -1,46 +1,11 @@
-const colors = require("tailwindcss/colors");
-
-function colorVarRGB(colorVariable) {
-  return ({ opacityVariable, opacityValue }) => {
-    if (opacityValue !== undefined) {
-      return `rgba(var(${colorVariable}), ${opacityValue})`;
-    } else if (opacityVariable !== undefined) {
-      return `rgba(var(${colorVariable}), var(${opacityVariable}, 1))`;
-    }
-    return `rgb(var(${colorVariable}))`;
-  };
-}
+const TailwindCssVariables = require("tailwind-css-variables");
 
 module.exports = {
   mode: "jit",
   purge: ["./index.html", "./src/**/*.{vue,ts}"],
   darkMode: "class",
   theme: {
-    colors: {
-      transparent: "transparent",
-      current: "currentColor",
-      black: colors.black,
-      white: colors.white,
-      gray: colors.trueGray,
-      indigo: colors.indigo,
-      red: colors.rose,
-      yellow: colors.amber,
-    },
     extend: {
-      colors: {
-        primary: colorVarRGB("--color-primary"),
-        "primary-variant": colorVarRGB("--color-primary-variant"),
-        secondary: colorVarRGB("--color-secondary"),
-        "secondary-variant": colorVarRGB("--color-secondary-variant"),
-        background: colorVarRGB("--color-background"),
-        surface: colorVarRGB("--color-surface"),
-        error: colorVarRGB("--color-error"),
-        "on-primary": colorVarRGB("--color-on-primary"),
-        "on-secondary": colorVarRGB("--color-on-secondary"),
-        "on-background": colorVarRGB("--color-on-background"),
-        "on-surface": colorVarRGB("--color-on-surface"),
-        "on-error": colorVarRGB("--color-on-error"),
-      },
       contrast: {
         25: "25%",
       },
@@ -52,5 +17,29 @@ module.exports = {
   variants: {
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    TailwindCssVariables({
+      colors: "color",
+      screens: false,
+      fontFamily: false,
+      fontSize: false,
+      fontWeight: false,
+      lineHeight: false,
+      letterSpacing: false,
+      backgroundSize: false,
+      borderWidth: false,
+      borderRadius: false,
+      width: false,
+      height: false,
+      minWidth: false,
+      minHeight: false,
+      maxWidth: false,
+      maxHeight: false,
+      padding: false,
+      margin: false,
+      boxShadow: false,
+      zIndex: false,
+      opacity: false,
+    }),
+  ],
 };

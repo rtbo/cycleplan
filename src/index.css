@@ -4,48 +4,29 @@
 
 @layer base {
   :root {
-    @apply text-opacity-80;
-    @apply bg-background text-on-background;
+    @apply bg-gray-50 text-black;
 
-    --color-primary: 98, 0, 238;
-    --color-primary-variant: 55, 0, 179;
-    --color-secondary: 3, 218, 198;
-    --color-secondary-variant: 1, 135, 134;
-    --color-background: 255, 255, 255;
-    --color-surface: 255, 255, 255;
-    --color-error: 176, 0, 32;
-    --color-on-primary: 255, 255, 255;
-    --color-on-secondary: 0, 0, 0;
-    --color-on-background: 0, 0, 0;
-    --color-on-surface: 0, 0, 0;
-    --color-on-error: 255, 255, 255;
-
-    --color-gantt-task-bar: 98, 0, 238;
-    --color-gantt-cycle-line: 176, 0, 32;
-    --color-gantt-link: 80, 0, 200;
-    --color-gantt-link--slack: 80, 0, 200;
-    --color-gantt-ruler: 128, 128, 128;
-    --color-gantt-grad: 128, 128, 128;
+    --color-gantt-task-bar: var(--color-indigo-700);
+    --color-gantt-task-insert: var(--color-pink-600);
+    --color-gantt-cycle-line: var(--color-red-700);
+    --color-gantt-link: var(--color-indigo-700);
+    --color-gantt-link--slack: var(--color-gray-500);
+    --color-gantt-ruler: var(--color-gray-300);
+    --color-gantt-grad: var(--color-gray-500);
+    --color-gantt-text: var(--color-black);
   }
 
   :root.dark {
-    --color-primary: 187, 134, 252;
-    --color-primary-variant: 55, 0, 179;
-    --color-secondary: 3, 218, 198;
-    --color-secondary-variant: 3, 218, 198;
-    --color-background: 18, 18, 18;
-    --color-surface: 18, 18, 18;
-    --color-error: 207, 102, 121;
-    --color-on-primary: 0, 0, 0;
-    --color-on-secondary: 0, 0, 0;
-    --color-on-background: 255, 255, 255;
-    --color-on-surface: 255, 255, 255;
-    --color-on-error: 0, 0, 0;
+    @apply bg-gray-900 text-white;
 
-    --color-gantt-task-bar: 187, 134, 252;
-    --color-gantt-cycle-line: 207, 102, 121;
-    --color-gantt-link: 200, 150, 255;
-    --color-gantt-link--slack: 200, 150, 255;
+    --color-gantt-task-bar: var(--color-indigo-300);
+    --color-gantt-task-insert: var(--color-pink-400);
+    --color-gantt-cycle-line: var(--color-red-400);
+    --color-gantt-link: var(--color-indigo-300);
+    --color-gantt-link--slack: var(--color-gray-500);
+    --color-gantt-ruler: var(--color-gray-700);
+    --color-gantt-grad: var(--color-gray-500);
+    --color-gantt-text: var(--color-white);
   }
 }
 

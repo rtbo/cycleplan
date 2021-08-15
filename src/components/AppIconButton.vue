@@ -20,25 +20,16 @@ export default defineComponent({
     },
     colorClass: {
       type: [String, Array],
-      validator: (cc: string | string[]) => {
-        if (typeof cc === "string") {
-          return cc.startsWith("text-");
-        } else {
-          return cc.every((cc) => cc.includes("text-"));
-        }
-      },
-      default: "text-on-background",
+      default: ["text-black", "dark:text-white"],
     },
     opacityClass: {
       type: [String, Array],
-      validator: (cc: string | string[]) => {
-        if (typeof cc === "string") {
-          return cc.startsWith("text-opacity");
-        } else {
-          return cc.every((cc) => cc.includes("text-opacity"));
-        }
-      },
-      default: ["text-opacity-60", "hover:text-opacity-100"],
+      default: [
+        "text-opacity-60",
+        "hover:text-opacity-100",
+        "dark:text-opacity-60",
+        "dark:hover:text-opacity-100",
+      ],
     },
     disabled: Boolean,
   },

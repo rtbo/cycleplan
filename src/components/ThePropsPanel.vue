@@ -307,7 +307,7 @@ export default defineComponent({
 
 <style lang="postcss">
 .props-panel {
-  @apply h-full p-2 pl-6 bg-gray-100 dark:bg-gray-800 border-l border-on-background border-opacity-20 dark:border-opacity-20;
+  @apply h-full p-2 pl-6 bg-gray-100 dark:bg-gray-800 border-l border-gray-800 dark:border-gray-100;
 }
 
 .props-panel__title {

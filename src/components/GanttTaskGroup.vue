@@ -31,7 +31,7 @@ export default defineComponent({
           w: store.state.timeScale * task.duration,
           h: TASKBAR_HEIGHT,
           style: {
-            fill: task.color || "rgb(var(--color-gantt-task-bar))",
+            fill: task.color || "var(--color-gantt-task-bar)",
           },
         };
       })

@@ -7,7 +7,10 @@
     >
       <span>
         Auto
-        <span v-if="autoActive" class="text-primary ml-1 font-bold">
+        <span
+          v-if="autoActive"
+          class="text-indigo-800 dark:text-indigo-300 ml-1 font-bold"
+        >
           {{ cycleTimeValue }}
         </span>
       </span>
@@ -19,7 +22,7 @@
           v-if="fixedActive"
           v-model="fixedValue"
           input-class="w-16"
-          class="text-primary ml-1 font-bold"
+          class="text-indigo-800 dark:text-indigo-300 ml-1 font-bold"
           :validate="isPositiveNumber"
         ></app-click-to-edit>
       </span>
@@ -31,7 +34,10 @@
     >
       <span>
         Loop
-        <span v-if="loopActive" class="text-primary ml-1 font-bold">
+        <span
+          v-if="loopActive"
+          class="text-indigo-800 dark:text-indigo-300 ml-1 font-bold"
+        >
           {{ cycleTimeValue }}
         </span>
       </span>
@@ -66,21 +72,20 @@ export default defineComponent({
     });
 
     const activeClasses = [
-      "bg-on-surface",
-      "bg-opacity-10",
+      "bg-gray-200",
+      "dark:bg-gray-700",
       "border",
-      "border-on-surface",
-      "border-opacity-50",
+      "border-gray-500",
     ];
     const inactiveClasses = [
       "cursor-pointer",
-      "bg-on-surface",
-      "bg-opacity-5",
+      "bg-gray-50",
+      "dark:bg-gray-800",
+      "border",
       "border-opacity-0",
-      "hover:bg-opacity-20",
-      "hover:border-1",
-      "hover:border-on-surface",
-      "hover:border-opacity-50",
+      "hover:bg-gray-100",
+      "hover:border-opacity-100",
+      "hover:border-gray-500",
       "transition",
       "duration-200",
     ];
