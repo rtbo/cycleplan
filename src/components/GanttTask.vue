@@ -1,5 +1,19 @@
 <template>
-  <rect :x="x" :y="y" :width="w" :height="h" :style="style" />
+  <g>
+    <rect :x="x" :y="y" :width="w" :height="h" :style="style" />
+    <rect
+      v-if="durationGrab"
+      :x="x + w - 10"
+      :y="y"
+      width="20"
+      :height="h"
+      fill="none"
+      stroke="none"
+      cursor="col-resize"
+      pointer-events="visible"
+      @mousedown="$emit('duration-grab', modelValue.id, $event)"
+    />
+  </g>
 </template>
 
 <script lang="ts">
@@ -15,6 +29,7 @@ export default defineComponent({
       required: true,
     },
   },
+  emits: ["duration-grab"],
   setup(props) {
     const store = useStore();
 
@@ -32,12 +47,17 @@ export default defineComponent({
       fill: props.modelValue.color || "var(--color-gantt-task-bar)",
     }));
 
+    const durationGrab = computed(
+      () => store.state.editMode === "task-duration"
+    );
+
     return {
       x,
       y,
       w,
       h,
       style,
+      durationGrab,
     };
   },
 });

@@ -87,6 +87,10 @@ export default defineComponent({
 }
 .gantt-header__text {
   fill: var(--color-gantt-text);
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   @apply text-sm;
 }
 </style>
