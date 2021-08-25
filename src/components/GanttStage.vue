@@ -12,7 +12,9 @@
           :model-value="link"
         />
       </g>
-      <gantt-task-group />
+      <g>
+        <gantt-task v-for="task in tasks" :key="task.id" :model-value="task" />
+      </g>
       <gantt-cycle-time-group />
     </svg>
   </div>
@@ -25,10 +27,10 @@ import { useStore } from "@/store";
 import GanttCycleTimeGroup from "./GanttCycleTimeGroup.vue";
 import GanttHeader from "./GanttHeader.vue";
 import GanttLink from "./GanttLink.vue";
-import GanttTaskGroup from "./GanttTaskGroup.vue";
+import GanttTask from "./GanttTask.vue";
 
 export default defineComponent({
-  components: { GanttCycleTimeGroup, GanttHeader, GanttLink, GanttTaskGroup },
+  components: { GanttCycleTimeGroup, GanttHeader, GanttLink, GanttTask },
   setup() {
     const store = useStore();
 
@@ -54,12 +56,14 @@ export default defineComponent({
     provideStageHeight(height);
 
     const links = computed(() => store.state.links);
+    const tasks = computed(() => store.state.tasks);
 
     return {
       wrapperEl,
       width,
       height,
       links,
+      tasks,
     };
   },
 });
